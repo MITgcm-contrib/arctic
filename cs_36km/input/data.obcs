@@ -1,0 +1,44 @@
+#
+# ***************
+# Open boundaries
+# ***************
+ &OBCS_PARM01
+ OB_Jnorth =   210*192,
+ OB_Ieast  =   192*210,
+ OB_Iwest  =   192*1,
+#
+ useOBCSprescribe=.TRUE.,
+#
+ OBNsFile='OBNs_arctic_210x192_19792014m.stable',
+ OBNtFile='OBNt_arctic_210x192_19792014m.stable',
+ OBNuFile='OBNu_arctic_210x192_19792014m.bin',
+ OBNvFile='OBNv_arctic_210x192_19792014m.bin',
+ OBEsFile='OBEs_arctic_210x192_19792014m.stable',
+ OBEtFile='OBEt_arctic_210x192_19792014m.stable',
+ OBEuFile='OBEu_arctic_210x192_19792014m.bin',
+ OBEvFile='OBEv_arctic_210x192_19792014m.bin',
+ OBWsFile='OBWs_arctic_210x192_19792014m.stable',
+ OBWtFile='OBWt_arctic_210x192_19792014m.stable',
+ OBWuFile='OBWu_arctic_210x192_19792014m.bin',
+ OBWvFile='OBWv_arctic_210x192_19792014m.bin',
+#
+ &
+
+# *****************************************
+# Orlanski Boundary Condition Parameters.
+# *****************************************
+# &OBCS_PARM02
+# cvelTimeScale = 2000.,
+# /
+
+# *****************************************
+# Sponge Layer Parameters.
+# *****************************************
+# &OBCS_PARM03
+# Urelaxobcsinner=7776000.E0,
+# Urelaxobcsbound=2592000.E0,
+# Vrelaxobcsinner=7776000.E0,
+# Vrelaxobcsbound=2592000.E0,
+# spongeThickness=10,
+# /
+

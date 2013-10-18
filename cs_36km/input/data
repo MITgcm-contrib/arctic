@@ -1,0 +1,137 @@
+# ====================
+# | Model parameters |
+# ====================
+#
+# Continuous equation parameters
+ &PARM01
+ tRef               = 3*23.,3*22.,21.,2*20.,19.,2*18.,17.,2*16.,15.,14.,13.,
+                      12.,11.,2*9.,8.,7.,2*6.,2*5.,3*4.,3*3.,4*2.,12*1.,
+ sRef               = 50*34.5,
+### viscAr= 1e-3,
+### viscAhGrid=1.E-1,
+### viscAh=1.e3,
+ viscAr= 1e-4,
+#ph( pre-2010
+# viscAh=5.e3,
+#ph lower-visc-201002
+ viscAh=3.e3,
+#ph)
+#
+ no_slip_sides=.FALSE.,
+ no_slip_bottom=.TRUE.,
+ diffKhT=1.E1,
+ diffK4T=0.,
+ diffKrT=1.e-7,
+ diffKhS=1.E1,
+ diffK4S=0.,
+ diffKrS=1.e-7,
+ tAlpha=2.E-4,
+ sBeta =7.4E-4,
+ gravity=9.81,
+ eosType='JMD95Z',
+ readBinaryPrec=32,
+ writeBinaryPrec=32,
+ useSingleCPUio=.TRUE.
+ globalfiles=.true.,
+ hFacMinDr=50.,
+ hFacMin=0.3,
+### hFacInf=0.1,
+### hFacSup=5.,
+# z* - begin
+#    select_rStar=2,
+#    nonlinFreeSurf=4,
+# * - end
+ implicitDiffusion=.true.,
+ implicitViscosity=.true.,
+ allowFreezing=.false.,
+# Following change took place starting in checkpoint57v_post
+# viscA4GridMax=0.5,
+##########################################################
+#ph(
+ vectorInvariantMomentum=.TRUE.,
+ StaggerTimeStep=.true.,
+ tempAdvScheme=30,
+ saltAdvScheme=30,
+ multiDimAdvection=.TRUE.,
+## tempVertAdvScheme=3,
+## saltVertAdvScheme=3,
+## tempImplVertAdv=.TRUE.,
+## saltImplVertAdv=.TRUE.,
+#ph)
+ sideDragFactor=0.,
+ SadournyCoriolis=.FALSE.,
+ useAbsVorticity=.FALSE.,
+ highOrderVorticity  = .FALSE.
+ bottomDragLinear = 0.001,
+ rigidLid=.FALSE.,
+ implicitFreeSurface=.TRUE.,
+ exactConserv=.TRUE.,
+ debuglevel=1,
+ &
+
+# Elliptic solver parameters
+ &PARM02
+ cg2dMaxIters=200,
+ cg2dTargetResidual=1.E-9,
+ &
+
+# Time stepping parameters
+ &PARM03
+### niter0=0,
+ niter0=262980,
+#
+### nTimeSteps=9900,
+# endtime for December 31, 2002
+# endtime=347155200.,
+# for 1 yr
+# endtime=31536000.,
+# for 2 yr
+# endtime=63072000.,
+# for 4 yr
+# endtime=126144000.,
+# for 4 yr + 9 months
+### endtime=149860800.,
+# for 8 yr
+# endtime=252288000.,
+# endtime for 10 yr
+# endtime=315360000.,
+# endtime=631152000.,
+ endtime=1262304000.,
+# 2 months
+# endtime=5270400.,
+#
+ abEps=0.1,
+ deltaT=2400,
+ cAdjFreq=0.,
+ pChkptFreq=2635200.,
+ chkptFreq=2635200.,
+# blending: 12/24/06
+# tauSaltClimRelax = 8722203.,
+# tauSaltClimRelax = 3842380.,
+ monitorFreq    = 864000.,
+### dumpFreq       = 2635200.,
+# adjMonitorFreq = 43200.,
+# adjDumpFreq    = 432000.,
+ forcing_In_AB = .FALSE.
+ dumpInitAndLast=.FALSE.
+ &
+
+# Gridding parameters
+ &PARM04
+ usingCartesianGrid=.FALSE.,
+ usingSphericalPolarGrid=.FALSE.,
+ usingCurvilinearGrid=.TRUE.,
+ delR   = 10.00, 10.00, 10.00, 10.00, 10.00, 10.00, 10.00, 10.01,
+ 10.03, 10.11, 10.32, 10.80, 11.76, 13.42, 16.04 , 19.82, 24.85, 
+ 31.10, 38.42, 46.50, 55.00, 63.50, 71.58, 78.90, 85.15, 90.18, 
+ 93.96, 96.58, 98.25, 99.25,100.01,101.33,104.56,111.33,122.83,
+ 139.09,158.94,180.83,203.55,226.50,249.50,272.50,295.50,318.50,
+ 341.50,364.50,387.50,410.50,433.50,456.50,
+ &
+
+# Input datasets
+ &PARM05
+ bathyFile      ='ETOPO2_210x192_arctic',
+ hydrogThetaFile='WGHC_T_210x192x50_arctic',
+ hydrogSaltFile ='WGHC_S_210x192x50_arctic',
+ &
