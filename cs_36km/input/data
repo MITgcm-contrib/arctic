@@ -77,8 +77,8 @@
 
 # Time stepping parameters
  &PARM03
-### niter0=0,
- niter0=262980,
+ niter0=0,
+### niter0=262980,
 #
 ### nTimeSteps=9900,
 # endtime for December 31, 2002
@@ -95,8 +95,8 @@
 # endtime=252288000.,
 # endtime for 10 yr
 # endtime=315360000.,
-# endtime=631152000.,
- endtime=1262304000.,
+ endtime=631152000.,
+# endtime=1262304000.,
 # 2 months
 # endtime=5270400.,
 #
