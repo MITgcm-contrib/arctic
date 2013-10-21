@@ -1,4 +1,4 @@
-C $Header: /u/gcmpack/MITgcm_contrib/high_res_cube/code-mods/DIAGNOSTICS_SIZE.h,v 1.9 2007/02/02 01:05:25 dimitri Exp $
+C $Header: /u/gcmpack/MITgcm_contrib/arctic/cs_36km/code/DIAGNOSTICS_SIZE.h,v 1.1 2013/10/18 21:06:45 dimitri Exp $
 C $Name:  $
 
 
@@ -20,11 +20,11 @@ C  and "diagSt_size" (statistics-diags) since values here are deliberately small
       INTEGER    numdiags
       INTEGER    nRegions, sizRegMsk, nStats
       INTEGER    diagSt_size
-      PARAMETER( ndiagMax = 500 )
-      PARAMETER( numlists = 53, numperlist = 1, numLevels=Nr )
-      PARAMETER( numdiags = 24+29*Nr )
+      PARAMETER( ndiagMax = 1000 )
+      PARAMETER( numlists = 50, numperlist = 10, numLevels=Nr )
+      PARAMETER( numdiags = 30+50*Nr )
       PARAMETER( nRegions = 0 , sizRegMsk = 1 , nStats = 4 )
-      PARAMETER( diagSt_size = 10*Nr )
+      PARAMETER( diagSt_size = 20*Nr )
 
 
 CEH3 ;;; Local Variables: ***

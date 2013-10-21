@@ -4,7 +4,7 @@
  useSEAICE      = .TRUE.,
  useGMREDI      = .TRUE.,
  useKPP         = .TRUE.,
-### useDiagnostics = .TRUE.,
+ useDiagnostics = .TRUE.,
  useOBCS        = .TRUE.,
  useSALT_PLUME  = .FALSE.,
  &
