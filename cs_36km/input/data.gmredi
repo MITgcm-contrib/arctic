@@ -10,19 +10,8 @@
 # GM_isopycK     :	isopycnal diffusion coefficient (default=GM_background_K)
 # GM_AdvForm     :	turn on GM Advective form       (default=Skew flux form)
  &GM_PARM01 
-  GM_Small_Number    = 1.D-16,
-  GM_slopeSqCutoff   = 1.D+08,
-  GM_AdvForm         = .TRUE.,
-  GM_background_K    = 1000.,
-  GM_taper_scheme    = 'dm95',
+  GM_background_K    = 53.0758
+  GM_Kmin_horiz      = 7.8423,
+  GM_taper_scheme    = 'ldd97',
   GM_maxSlope        = 1.e-2,
-  GM_Kmin_horiz      = 50.,
-  GM_Scrit           = 4.e-3,
-  GM_Sd              = 1.e-3,
-# GM_Visbeck_alpha   = 0.,
-# GM_Visbeck_length  = 2.e+5,
-# GM_Visbeck_depth   = 1.e+3,
-# GM_Visbeck_maxval_K= 2.5e+3,
  &
-
-

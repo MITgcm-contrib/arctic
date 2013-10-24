@@ -9,7 +9,6 @@
  exf_yftype        = 'RL',
  useExfYearlyFields= .TRUE.,
  useExfCheckRange  = .FALSE.,
- useRelativeWind   = .FALSE.,
  &
 #
  &EXF_NML_02
@@ -127,15 +126,15 @@
  &
 #
  &EXF_NML_OBCS
-  obcsNstartdate1   = 19781215,
-  obcsNstartdate2   = 060000,
-  obcsNperiod       = 2629800.0,
+ obcsNstartdate1   = 19911215,
+ obcsNstartdate2   = 060000,
+ obcsNperiod       = 2635200.0,
 #
-  obcsWstartdate1   = 19781215,
-  obcsWstartdate2   = 060000,
-  obcsWperiod       = 2629800.0,
+ obcsEstartdate1   = 19911215,
+ obcsEstartdate2   = 060000,
+ obcsEperiod       = 2635200.0,
 #
-  obcsEstartdate1   = 19781215,
-  obcsEstartdate2   = 060000,
-  obcsEperiod       = 2629800.0,
+ obcsWstartdate1   = 19911215,
+ obcsWstartdate2   = 060000,
+ obcsWperiod       = 2635200.0,
  &

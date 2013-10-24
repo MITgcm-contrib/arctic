@@ -1,35 +1,54 @@
 # SEAICE parameters
  &SEAICE_PARM01
-# SEAICEheatConsFix  = .TRUE.,
-  SEAICE_no_slip     = .TRUE.,
-# for adjoint simulations you will need
-  SEAICEadvScheme    = 30,
-  SEAICE_drag        = 0.001,
-  SEAICE_wetAlbTemp  = 0.0,
-  SEAICE_salt0       = 4.0,
-# this value should be default for the McPhee parameterization
-  SEAICE_mcPheeTaper=0.92,
-# Depending on vertical resolution this angle should have a value
-# > 0 (e.g., 25deg for drF(1)=10m,)
-# SEAICE_waterTurnAngle = 0.0,
-#
-# SPECIFIC SETTINGS:
+      SEAICE_multDim     = 7
 #
       SEAICE_dryIceAlb   = 0.7,
       SEAICE_wetIceAlb   = 0.7060,
       SEAICE_drySnowAlb  = 0.8652,
       SEAICE_wetSnowAlb  = 0.8085,
-###      SEAICE_waterAlbedo = 0.2756,
+      SEAICE_waterDrag   = 5.5627,
+      SEAICE_drag        = 0.00114,
+      HO                 = 0.6074,
+      SEAICE_strength    = 2.6780e+04,
       LSR_ERROR          = 2.e-4,
-      SEAICEuseDYNAMICS  = .TRUE.,
-      AreaFile           = '',
-      HsnowFile          = '',
-      HsaltFile          = '',
-      HeffFile           = 'heff_file6_210x192_arctic',
+      SEAICE_no_slip     = .TRUE.,
+      SEAICEuseMetricTerms = .TRUE.,
+      SEAICEadvScheme    = 7,
+      Diff1              = 0.0,
+#
+      MIN_ATEMP          = -40.,
+      MIN_TICE           = -40.,
+      SEAICEadvSnow      = .TRUE.,
+      SEAICEadvSalt      = .TRUE.,
+      SEAICEadvHeff      = .TRUE.,
+      SEAICEadvArea      = .TRUE.,
+      SEAICEuseFlooding  = .TRUE.,
+#ian new begin
+      SEAICE_area_reg = 0.15,
+      SEAICE_area_floor = 0.00001,
+      SEAICE_hice_reg = 0.1,
+      IMAX_TICE = 6,
+      SEAICE_EPS = 1.E-8,
+#ian new end
+#ph new begin
+      SEAICE_salt0 = 4.0,
+      SEAICE_doOpenWaterGrowth = .TRUE.,
+      SEAICE_doOpenWaterMelt = .TRUE.,
+      SEAICE_areaLossFormula = 1,
+#ph new end
+      SEAICE_wetAlbTemp  = 0.0,
+      SEAICE_mcPheeTaper = 0.92,
+      SEAICE_mcPheePiston= 0.001
+      SEAICE_frazilFrac  = 0.1,
+      SEAICE_saltFrac    = 0.3548,
+#
+      AreaFile           = 'AREA_210x192_arctic.cube81',
+      HeffFile           = 'HEFF_210x192_arctic.cube81',
+      HsaltFile          = 'HSALT_210x192_arctic.cube81',
+      HsnowFile          = 'HSNOW_210x192_arctic.cube81',
  &
 
  &SEAICE_PARM02
-  mult_ice_export = 1.,
  &
 
  &SEAICE_PARM03

@@ -1,4 +1,3 @@
-#
 # ***************
 # Open boundaries
 # ***************
@@ -9,36 +8,17 @@
 #
  useOBCSprescribe=.TRUE.,
 #
- OBNsFile='OBNs_arctic_210x192_19792014m.stable',
- OBNtFile='OBNt_arctic_210x192_19792014m.stable',
- OBNuFile='OBNu_arctic_210x192_19792014m.bin',
- OBNvFile='OBNv_arctic_210x192_19792014m.bin',
- OBEsFile='OBEs_arctic_210x192_19792014m.stable',
- OBEtFile='OBEt_arctic_210x192_19792014m.stable',
- OBEuFile='OBEu_arctic_210x192_19792014m.bin',
- OBEvFile='OBEv_arctic_210x192_19792014m.bin',
- OBWsFile='OBWs_arctic_210x192_19792014m.stable',
- OBWtFile='OBWt_arctic_210x192_19792014m.stable',
- OBWuFile='OBWu_arctic_210x192_19792014m.bin',
- OBWvFile='OBWv_arctic_210x192_19792014m.bin',
+ OBNsFile='OBNs_arctic_210x192.stable',
+ OBNtFile='OBNt_arctic_210x192.stable',
+ OBNuFile='OBNu_arctic_210x192.bin',
+ OBNvFile='OBNv_arctic_210x192.bin',
+ OBEsFile='OBEs_arctic_210x192.stable',
+ OBEtFile='OBEt_arctic_210x192.stable',
+ OBEuFile='OBEu_arctic_210x192.bin',
+ OBEvFile='OBEv_arctic_210x192.bin',
+ OBWsFile='OBWs_arctic_210x192.stable',
+ OBWtFile='OBWt_arctic_210x192.stable',
+ OBWuFile='OBWu_arctic_210x192.bin',
+ OBWvFile='OBWv_arctic_210x192.bin',
 #
  &
-
-# *****************************************
-# Orlanski Boundary Condition Parameters.
-# *****************************************
-# &OBCS_PARM02
-# cvelTimeScale = 2000.,
-# /
-
-# *****************************************
-# Sponge Layer Parameters.
-# *****************************************
-# &OBCS_PARM03
-# Urelaxobcsinner=7776000.E0,
-# Urelaxobcsbound=2592000.E0,
-# Vrelaxobcsinner=7776000.E0,
-# Vrelaxobcsbound=2592000.E0,
-# spongeThickness=10,
-# /
-

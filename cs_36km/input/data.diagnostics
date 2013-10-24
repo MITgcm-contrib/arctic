@@ -10,46 +10,104 @@
 #  fields(:,n) : list of diagnostics fields (8.c) (see "available_diagnostics" file
 #                 for the list of all available diag. in this particular config)
 #-----------------
+#
+# daily 2-D fields:
+# =================
+# 
+# ETAN     Perturbation of Surface (pressure, height) (Pa,m)
+# oceTAUX  zonal surface wind stress, >0 increases uVel (N/m^2)
+# oceTAUY  meridional surf. wind stress, >0 increases vVel (N/m^2)
+# surForcT model surface forcing for Temperature, >0 increases theta (W/m^2)
+# oceQsw   net Short-Wave radiation (+=down), >0 increases theta (W/m^2)
+# surForcS model surface forcing for Salinity, >0 increases salinity (g/m^2/s)
+# SSS      Sea Surface Salinity (g/kg)
+# SST      Sea Surface Temperature (degC,K)
+# UVEL_k1  Zonal Component of Velocity at level 1 (m/s)
+# VVEL_k1  Meridional Component of Velocity at level 1 (m/s)
+# SIarea   SEAICE fractional ice-covered area [0 to 1]
+# SIheff   SEAICE effective ice thickness (m)
+# SIuice   SEAICE zonal ice velocity, >0 from West to East (m/s)
+# SIvice   SEAICE merid. ice velocity, >0 from South to North (m/s)
+# SIhsnow  SEAICE snow thickness (m)
+# SIhsalt  SEAICE salinity (g/m^2)
+# 
+# monthly 3-D fields:
+# ===================
+# 
+# SALTanom Salt anomaly (=SALT-35; g/kg)
+# THETA    Potential Temperature (degC,K)
+# UVELMASS Zonal Mass-Weighted Comp of Velocity (m/s)
+# VVELMASS Meridional Mass-Weighted Comp of Velocity (m/s)
+# WVELMASS Vertical Mass-Weighted Comp of Velocity (m/s)
+#
  &diagnostics_list
-#
-   dumpatlast  = .FALSE.,
-#
-  frequency(1) = -604800.0,
-   fields(1,1) = 'ETAN    ','SIheff  ','SIhsnow ',
-   filename(1) = 'budg2d_snap_set1',
-  timePhase(1) = 0.,
-  fileFlags(1) = 'D       ',
-#---
-  frequency(2) = -604800.0,
-   fields(1,2) = 'THETA   ','SALT    ',
-   filename(2) = 'budg2d_snap_set2',
-  timePhase(2) = 0.,
-  fileFlags(2) = 'DI      ',
-#---
-  frequency(3) = -604800.0,
-   fields(1,3) = 'sIceLoad','PHIBOT  ',
-   filename(3) = 'budg2d_snap_set3',
-  timePhase(3) = 0.,
-  fileFlags(3) = 'D       ',
-#---
-  frequency(4) = 604800.0,
-   fields(1,4) = 'oceFWflx','SIatmFW ','TFLUX   ','SItflux  ',
-#                'SFLUX   ','oceSPflx',
-   filename(4) = 'budg2d_zflux_set1',
-  fileFlags(4) = 'D       ',
-#---
-  frequency(5) = 604800.0,
-   fields(1,5) = 'UVELMASS','VVELMASS',
-                 'ADVx_TH ','ADVy_TH ','DFxE_TH ','DFyE_TH ',
-                 'ADVx_SLT','ADVy_SLT','DFxE_SLT','DFyE_SLT',
-   filename(5) = 'budg2d_hflux_set1',
-  fileFlags(5) = 'DI      ',
-#---
-  frequency(6) = 604800.0,
-   fields(1,6) ='ADVxHEFF','ADVyHEFF','DFxEHEFF','DFyEHEFF',
-                'ADVxSNOW','ADVySNOW','DFxESNOW','DFyESNOW',
-   filename(6) = 'budg2d_hflux_set2',
-  fileFlags(6) = 'D       ',
+  frequency(1)  = 86400.,
+   fields(1,1)  = 'ETAN    ',
+   filename(1)  = 'ETAN',
+  frequency(2)  = 86400.,
+   fields(1,2)  = 'oceTAUX ',
+   filename(2)  = 'oceTAUX',
+  frequency(3)  = 86400.,
+   fields(1,3)  = 'oceTAUY ',
+   filename(3)  = 'oceTAUY',
+  frequency(4)  = 86400.,
+   fields(1,4)  = 'surForcT',
+   filename(4)  = 'surForcT',
+  frequency(5)  = 86400.,
+   fields(1,5)  = 'oceQsw  ',
+   filename(5)  = 'oceQsw',
+  frequency(6)  = 86400.,
+   fields(1,6)  = 'surForcS',
+   filename(6)  = 'surForcS',
+  frequency(7)  = 86400.,
+   fields(1,7)  = 'SALT    ',
+   levels(1,7)  = 1.,
+   filename(7)  = 'SSS',
+  frequency(8)  = 86400.,
+   fields(1,8)  = 'THETA   ',
+   levels(1,8)  = 1.,
+   filename(8)  = 'SST',
+  frequency(9)  = 86400.,
+   fields(1,9)  = 'UVEL    ',
+   levels(1,9)  = 1.,
+   filename(9)  = 'UVEL_k1',
+  frequency(10) = 86400.,
+   fields(1,10) = 'VVEL    ',
+   levels(1,10) = 1.,
+   filename(10) = 'VVEL_k1',
+  frequency(11) = 86400.,
+   fields(1,11) = 'SIarea  ',
+   filename(11) = 'SIarea',
+  frequency(12) = 86400.,
+   fields(1,12) = 'SIheff  ',
+   filename(12) = 'SIheff',
+  frequency(13) = 86400.,
+   fields(1,13) = 'SIuice  ',
+   filename(13) = 'SIuice',
+  frequency(14) = 86400.,
+   fields(1,14) = 'SIvice  ',
+   filename(14) = 'SIvice',
+  frequency(15) = 86400.,
+   fields(1,15) = 'SIhsnow ',
+   filename(15) = 'SIhsnow',
+  frequency(16) = 86400.,
+   fields(1,16) = 'SIhsalt ',
+   filename(16) = 'SIhsalt',
+  frequency(17) = 2635200.,
+   fields(1,17) = 'SALTanom',
+   filename(17) = 'SALTanom',
+  frequency(18) = 2635200.,
+   fields(1,18) = 'THETA   ',
+   filename(18) = 'THETA',
+  frequency(19) = 2635200.,
+   fields(1,19) = 'UVELMASS',
+   filename(19) = 'UVELMASS',
+  frequency(20) = 2635200.,
+   fields(1,20) = 'VVELMASS',
+   filename(20) = 'VVELMASS',
+  frequency(21) = 2635200.,
+   fields(1,21) = 'WVELMASS',
+   filename(21) = 'WVELMASS',
  &
 
 # Parameter for Diagnostics of per level statistics:
@@ -64,39 +122,9 @@
 #                 file for the list of all available diag. in this particular config)
 #-----------------
  &DIAG_STATIS_PARMS
-#diagSt_regMaskFile=yourmask,
-# nSetRegMskFile =   1,
-# set_regMask    =   1, 1, 1, 1, 1, 1, 1, 1,
-# val_regMask    = 1.,2.,3.,4.,5.,6.,7.,8.,
-#
-     stat_freq(1) = -604800.0,
- stat_fields(1,1) = 'ETAN    ','SIheff  ','SIhsnow ',
-    stat_fname(1) = 'stats_budg2d_snap_set1',
-    stat_phase(1) = 0.,
-#---
-     stat_freq(2) = -604800.0,
- stat_fields(1,2) = 'THETA   ','SALT    ',
-    stat_fname(2) = 'stats_budg2d_snap_set2',
-    stat_phase(2) = 0.,
-#---
-     stat_freq(3) = -604800.0,
- stat_fields(1,3) = 'sIceLoad','PHIBOT  ',
-    stat_fname(3) = 'stats_budg2d_snap_set3',
-    stat_phase(3) = 0.,
-#---
-     stat_freq(4) = 604800.0,
- stat_fields(1,4) = 'oceFWflx','SIatmFW ','TFLUX   ','SItflux  ',
-#                   'SFLUX   ','oceSPflx',
-    stat_fname(4) = 'stats_budg2d_zflux_set1',
-#---
-     stat_freq(5) = 604800.0,
- stat_fields(1,5) = 'UVELMASS','VVELMASS',
-                    'ADVx_TH ','ADVy_TH ','DFxE_TH ','DFyE_TH ',
-                    'ADVx_SLT','ADVy_SLT','DFxE_SLT','DFyE_SLT',
-    stat_fname(5) = 'stats_budg2d_hflux_set1',
-#---
-     stat_freq(6) = 604800.0,
- stat_fields(1,6) ='ADVxHEFF','ADVyHEFF','DFxEHEFF','DFyEHEFF',
-                   'ADVxSNOW','ADVySNOW','DFxESNOW','DFyESNOW',
-    stat_fname(6) = 'stats_budg2d_hflux_set2',
+#- an example just to check the agreement with MONITOR output:
+#stat_fields(1,1)= 'ETAN    ','UVEL    ','VVEL    ','WVEL    ', 'THETA   ',
+#   stat_fname(1)= 'dynStDiag',
+#    stat_freq(1)= -864000.,
+#   stat_phase(1)= 0.,
  &
