@@ -77,3 +77,66 @@ Acknowledgments
 Getting this simulation to run would not have been possible without Fanny Monteiro in the author’s
 home institution, members of the MITgcm-support online community and in particular, Dimitris
 Menemenlis, Renske Gelderloos and Patrick Heimbach.
+
+=======================
+
+Directory contents for
+http://ecco2.jpl.nasa.gov/data1/arctic/run_template2/
+
+Matlab script "mk_run_template2.m" was used to generate many of the model
+input files described below.
+
+Grid information files needed when OLD_GRID_IO option is defined in
+CPP_OPTIONS.h.  See GRID.h for a digram of various distances.
+LONC.bin  longitude east of cell center
+LATC.bin  latitude north of cell center
+LONG.bin  longitude east of southwest corner of cell
+LATG.bin  latitude north of southwest corner of cell
+DYF.bin   meridional distance in m between V-points
+DXF.bin   zonal distance in m between U-points
+DYU.bin   meridional distance in m between U-points
+DXV.bin   zonal distance in m between V-points
+DYC.bin   meridional distance in m between tracer points
+DXC.bin   zonal distance in m between tracer points
+DYG.bin   meridional distance in m between cell corners
+DXG.bin   zonal distance in m between cell corners
+RAZ.bin   vertical face area in m^2 for vorticity points
+RAW.bin   vertical face area in m^2 for u cells
+RAS.bin   vertical face area in m^2 for v cells
+RA.bin    vertical face area in m^2 for tracer cells
+
+Model bathymetry, initial, and surface boundary condition files.
+ETOPO2_210x192_arctic        model bathymetry (m)
+WGHC_S_210x192x50_arctic     initial salinity (g/kg)
+WGHC_T_210x192x50_arctic     initial potential temperature (deg C)
+AREA_210x192_arctic.cube81   initial ice concentration (fractional >=0, <=1)
+HEFF_210x192_arctic.cube81   initial effective sea ice thickness (m)
+HSALT_210x192_arctic.cube81  initial effective sea ice salinity (g/m^2)
+HSNOW_210x192_arctic.cube81  initial effective snow thickness (m)
+
+Open boundary condition files.
+OBNs_arctic_210x192.stable  North open boundary conditions, salinity (g/kg)
+OBNt_arctic_210x192.stable  North open boundary conditions, temperature (deg C)
+OBNu_arctic_210x192.bin     North open boundary conditions, U-velocity (m/s)
+OBNv_arctic_210x192.bin     North open boundary conditions, V-velocity (m/s)
+OBEs_arctic_210x192.stable  South open boundary conditions, salinity (g/kg)
+OBEt_arctic_210x192.stable  South open boundary conditions, temperature (deg C)
+OBEu_arctic_210x192.bin     South open boundary conditions, U-velocity (m/s)
+OBEv_arctic_210x192.bin     South open boundary conditions, V-velocity (m/s)
+OBWs_arctic_210x192.stable  West open boundary conditions, salinity (g/kg)
+OBWt_arctic_210x192.stable  West open boundary conditions, temperature (deg C)
+OBWu_arctic_210x192.bin     West open boundary conditions, U-velocity (m/s)
+OBWv_arctic_210x192.bin     West open boundary conditions, V-velocity (m/s)
+
+Runtime parameter files.
+eedata
+data
+data.pkg
+data.cal
+data.exf
+data.gmredi
+data.seaice
+data.obcs
+data.kpp
+data.salt_plume
+data.diagnostics
