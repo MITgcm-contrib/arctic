@@ -7,4 +7,5 @@
  useEXF         = .TRUE.,
  useOBCS        = .TRUE.,
  useSALT_PLUME  = .TRUE.,
+ useFRAZIL      = .TRUE.,
  &
