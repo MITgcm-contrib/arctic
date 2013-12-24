@@ -14,3 +14,12 @@ and Nguyen et al 2011 papers are VERY close to each other, thus ATN considered t
 CPP_OPTIONS.h_phAug2012
 SEAICE_OPTIONS.h_phAug2012
 
+To run this set up, use binary inputs from:
+http://ecco2.jpl.nasa.gov/data6/arctic/run_template_cube81/
+obcs for the years 1979--2014:  +ob1979_2014_merge
+
+There are two bathymetries:
+1) original from Nguyen et al 2011: BATHY_cube81_420x384_arctic
+2) an updated version to blank out some CAA passages (set bathymetry to zero)
+  because 18km can not resolve these passages resutling in excessive sea ice thickness
+
