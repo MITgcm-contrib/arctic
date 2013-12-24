@@ -1,0 +1,26 @@
+# ***************
+# Open boundaries
+# ***************
+ &OBCS_PARM01
+ OB_Jnorth =   420*384,
+ OB_Ieast  =   384*420,
+ OB_Iwest  =   384*1,
+#
+ useOBCSprescribe=.TRUE.,
+#
+ OBNsFile='OBNs_arctic_420x384_19792014m.stable',
+ OBNtFile='OBNt_arctic_420x384_19792014m.stable',
+ OBNuFile='OBNu_arctic_420x384_19792014m.bin',
+ OBNvFile='OBNv_arctic_420x384_19792014m.balance',
+#
+ OBWsFile='OBWs_arctic_420x384_19792014m.stable',
+ OBWtFile='OBWt_arctic_420x384_19792014m.stable',
+ OBWuFile='OBWu_arctic_420x384_19792014m.bin',
+ OBWvFile='OBWv_arctic_420x384_19792014m.bin',
+#
+ OBEsFile='OBEs_arctic_420x384_19792014m.stable',
+ OBEtFile='OBEt_arctic_420x384_19792014m.stable',
+ OBEuFile='OBEu_arctic_420x384_19792014m.bin',
+ OBEvFile='OBEv_arctic_420x384_19792014m.bin',
+#
+ &

@@ -1,0 +1,10 @@
+# Packages
+ &PACKAGES
+ useSEAICE      = .TRUE.,
+ useGMRedi      = .FALSE.,
+ useKPP         = .TRUE.,
+ useDiagnostics = .TRUE.,
+ useEXF         = .TRUE.,
+ useOBCS        = .TRUE.,
+ useSALT_PLUME  = .TRUE.,
+ &
