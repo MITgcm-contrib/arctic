@@ -1,5 +1,6 @@
 # SEAICE parameters
  &SEAICE_PARM01
+      SEAICE_multDim     = 7
 # Gael's param for pstar
 #      SEAICEpresH0=2.,
 #      SEAICEpresPow0=1,
