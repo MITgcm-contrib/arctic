@@ -15,7 +15,7 @@ CPP_OPTIONS.h_phAug2012
 SEAICE_OPTIONS.h_phAug2012
 
 To run this set up, use binary inputs from:
-http://ecco2.jpl.nasa.gov/data6/arctic/run_template_cube81/
+ftp://ecco2.jpl.nasa.gov/data6/arctic/run_template_cube81/
 obcs for the years 1979--2014:  +ob1979_2014_merge
 
 There are two bathymetries:

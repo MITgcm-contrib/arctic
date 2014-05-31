@@ -20,23 +20,23 @@ jonny.williams@bristol.ac.uk
 
 5.  The following files are all required in the run directory
        a. the executable you get when compiling “mitgcmuv”
-       b. http://ecco2.jpl.nasa.gov/data2/data/runoff/runoff-360x180x12.bin
-       c. http://ecco2.jpl.nasa.gov/data2/data/atmos/jra25/*1979*
+       b. ftp://ecco2.jpl.nasa.gov/data2/data/runoff/runoff-360x180x12.bin
+       c. ftp://ecco2.jpl.nasa.gov/data2/data/atmos/jra25/*1979*
           i. note that the following files may need their “.txt” suffixes removed
              1. jra25_v10m_1979
              2. jra25_u10m_1979
              3. jra25_spfh2m_1979
              4. jra25_temp2m_1979
        d. Also, the run requires the following files which are not included in the
-          http://ecco2.jpl.nasa.gov/data2/data/atmos/jra25/ directory (I have simply created
+          ftp://ecco2.jpl.nasa.gov/data2/data/atmos/jra25/ directory (I have simply created
           cymbolic links to the 1979 equivalents).
           i. jra25_dlw_1978
          ii. jra25_dsw_1978
         iii. jra25_rain_1978
-       e. http://ecco2.jpl.nasa.gov/data1/arctic/run_template2/*
+       e. ftp://ecco2.jpl.nasa.gov/data1/arctic/run_template2/*
 
 6. There are some duplicate file names in
-   http://ecco2.jpl.nasa.gov/data1/arctic/run_template2/ and cs_36km_tutorial/input and it is
+   ftp://ecco2.jpl.nasa.gov/data1/arctic/run_template2/ and cs_36km_tutorial/input and it is
    crucial that those in the latter are used. I have done this by copying them to my run
    directory (platform dependent) second to automatically overwrite the other ones.
 
@@ -81,7 +81,7 @@ Menemenlis, Renske Gelderloos and Patrick Heimbach.
 =======================
 
 Directory contents for
-http://ecco2.jpl.nasa.gov/data1/arctic/run_template2/
+ftp://ecco2.jpl.nasa.gov/data1/arctic/run_template2/
 
 Matlab script "mk_run_template2.m" was used to generate many of the model
 input files described below.
