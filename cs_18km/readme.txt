@@ -1,9 +1,10 @@
-update input/data from run/input
-copy run_template_cube81/runoff1p2472-360x180x12.bin to skylla
+Instructions for running optimized (A1) simulation from Nguyen et al (2011)
+http://ecco2.org/manuscripts/2011/NguyenJGR2011.pdf
+
+===============
 
 DM 9-Jul-2015
-Instructions for running the Nguyen et al 2011 configuration
-with checkpoint65m (2015/06/15) on pleiades
+Updated for checkpoint65m (2015/06/15) on pleiades
 
 -> get a copy of ftp://ecco2.jpl.nasa.gov/data6/arctic/run_template_cube81
    also available on pfe:/nobackup/dmenemen/arctic18km/run_template_cube81
