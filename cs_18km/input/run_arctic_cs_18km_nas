@@ -1,0 +1,13 @@
+#!/bin/csh
+#PBS -l select=12:ncpus=16:model=san
+##PBS -q devel
+##PBS -l walltime=2:00:00
+#PBS -q long
+#PBS -l walltime=24:00:00
+#PBS -j oe
+#PBS -m abe
+
+module load comp-intel/2015.0.090 mpi-sgi/mpt.2.11r13 netcdf/4.0
+cd $PBS_O_WORKDIR
+limit stacksize unlimited
+mpiexec -np 180 ./mitgcmuv

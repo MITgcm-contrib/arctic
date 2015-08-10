@@ -1,4 +1,4 @@
-C $Header: /u/gcmpack/MITgcm_contrib/arctic/cs_18km/code/SEAICE_OPTIONS.h,v 1.1 2013/12/24 00:08:45 atn Exp $
+C $Header: /u/gcmpack/MITgcm_contrib/arctic/cs_18km/code/SEAICE_OPTIONS.h,v 1.2 2014/01/04 00:42:13 dimitri Exp $
 C $Name:  $
 
 C     *==========================================================*
@@ -65,7 +65,26 @@ C--   To try avoid 'spontaneous generation' of tracer maxima by advdiff.
 # define ALLOW_SITRACER_ADVCAP
 #endif
 
-#define SEAICE_ADD_SUBLIMATION_TO_FWBUDGET
+C--   Enable grease ice parameterization
+C     The grease ice parameterization delays formation of solid 
+C     sea ice from frazil ice by a time constant and provides a 
+C     dynamic calculation of the initial solid sea ice thickness 
+C     HO as a function of winds, currents and available grease ice 
+C     volume. Grease ice does not significantly reduce heat loss 
+C     from the ocean in winter and area covered by grease is thus 
+C     handled like open water.
+C     (For details see Smedsrud and Martin, 2014, Ann.Glac.)
+C     Set SItrName(1) = 'grease' in namelist SEAICE_PARM03 in data.seaice
+C     then output SItr01 is SItrNameLong(1) = 'grease ice volume fraction',
+C     with SItrUnit(1) = '[0-1]', which needs to be multiplied by SIheff
+C     to yield grease ice volume. Additionally, the actual grease ice
+C     layer thickness (diagnostic SIgrsLT) can be saved.
+#undef SEAICE_GREASE
+C--   grease ice uses SItracer:
+#ifdef SEAICE_GREASE
+# define ALLOW_SITRACER
+# define ALLOW_SITRACER_ADVCAP
+#endif
 
 C--   By default the seaice model is discretized on a B-Grid (for
 C     historical reasons). Define the following flag to use a new
@@ -135,6 +154,12 @@ C     SEAICE_CAP_SUBLIM is not needed as of now, but kept just in case.
 
 C--   Enable free drift code
 #undef SEAICE_ALLOW_FREEDRIFT
+
+C--   pkg/seaice cost functions compile flags
+c       >>> Sea-ice volume (requires pkg/cost)
+#undef ALLOW_COST_ICE
+c       >>> Sea-ice misfit to obs (requires pkg/cost and ecco)
+#undef ALLOW_SEAICE_COST_SMR_AREA
 
 #endif /* ALLOW_SEAICE */
 #endif /* SEAICE_OPTIONS_H */

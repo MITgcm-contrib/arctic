@@ -1,4 +1,4 @@
-C $Header: /u/gcmpack/MITgcm/model/inc/SIZE.h,v 1.27 2005/09/19 18:42:35 baylor Exp $
+C $Header: /u/gcmpack/MITgcm_contrib/arctic/cs_18km/code/SIZE.h,v 1.1 2013/12/24 00:08:45 atn Exp $
 C $Name:  $
 C
 CBOP
@@ -55,9 +55,9 @@ C     Nr  :: No. points in Z for full process domain.
      &           Ny  = sNy*nSy*nPy,
      &           Nr  =  50)
 
-C     MAX_OLX  - Set to the maximum overlap region size of any array
+C     MAX_OLX :: Set to the maximum overlap region size of any array
 C     MAX_OLY    that will be exchanged. Controls the sizing of exch
-C                routine buufers.
+C                routine buffers.
       INTEGER MAX_OLX
       INTEGER MAX_OLY
       PARAMETER ( MAX_OLX = OLx,

@@ -49,16 +49,8 @@
 
 # Time stepping parameters
  &PARM03
-# niter0=0,
-# niter0=205992,
-# niter0=394488,
-# niter0=585072,
- niter0=804240,
-# endtime= 599594400.,
-# 33yr 1979:2011
-# endtime=1040688000.,
-# 37yr: 37*366*24*3600
- endtime=1170028800.,
+ niter0=0,
+ endtime= 725846400.,
  abEps=0.1,
  deltaT=1200.,
  cAdjFreq=0.,
@@ -88,5 +80,4 @@
  bathyFile      = 'BATHY_cube81_420x384_arctic',
  hydrogThetaFile= 'WOA05_THETA_JAN_420x384x50_arctic',
  hydrogSaltFile = 'WOA05_SALT_JAN_420x384x50_arctic',
-# diffKrFile     = 'DIFFKR_1em6Basin_420x384x50_arctic',
  &

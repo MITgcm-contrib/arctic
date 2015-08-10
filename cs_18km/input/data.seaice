@@ -5,9 +5,6 @@
       SEAICE_wetIceAlb   = 0.7060,
       SEAICE_drySnowAlb  = 0.8652,
       SEAICE_wetSnowAlb  = 0.8085,
-# no long valid
-####      SEAICE_waterAlbedo = 0.2756,
-# done no longer valid
       SEAICE_strength    = 2.2640e+04,
       OCEAN_drag         = 8.1541e-04,
       SEAICE_waterDrag   = 5.5627,
@@ -15,24 +12,12 @@
       HO                 = 0.6074,
       LSR_ERROR          = 1e-4,
       SEAICEuseDYNAMICS  = .TRUE.,
-
-#ian remove begin
-#if      SEAICE_salinity    = 0.3,
-#if      SEAICE_freeze      = -1.7348,
-#if      SEAICE_availHeatFrac = 0.1,
-#if      ICE2WATR           = 0.92D0,
-#ian remove end
-
-#ian new begin
-      SEAICE_saltFrac = 0.3,
-      SEAICE_area_reg = 0.15,
-      SEAICE_area_floor = 0.00001,
-      SEAICE_hice_reg = 0.1,
-      IMAX_TICE = 6,
-      SEAICE_EPS = 1.E-8,
-#ian new end
-
-# some old still valid flags
+      SEAICE_saltFrac    = 0.3,
+      SEAICE_area_reg    = 0.15,
+      SEAICE_area_floor  = 0.00001,
+      SEAICE_hice_reg    = 0.1,
+      IMAX_TICE          = 6,
+      SEAICE_EPS         = 1.E-8,
       MIN_ATEMP          = -40.,
       MIN_TICE           = -40.,
       SEAICEadvSnow      = .TRUE.,
@@ -42,23 +27,12 @@
       DIFF1              = 0.0,
       SEAICEuseMetricTerms = .TRUE.,
       SEAICE_no_slip     = .TRUE.,
-# done old valid
-# a new flag
       SEAICEheatConsFix  = .TRUE.,
-# end new
-# ph new begin
       SEAICE_doOpenWaterGrowth = .TRUE.,
       SEAICE_doOpenWaterMelt = .TRUE.,
       SEAICE_areaLossFormula = 1,
-# between 0 and dF(1)/deltaT
-# 10 m / 3600 sec
-#      SEAICE_mcPheePiston = 0.0027,
-# 10 m / 1200 sec
       SEAICE_mcPheePiston = 0.0083,
-# 10 m / 2400 sec
-#      SEAICE_mcPheePiston =  0.0041,
-#ph new end
-
+#
       AreaFile           = 'AREA_420x384_arctic.cube81',
       HsnowFile          = 'HSNOW_420x384_arctic.cube81',
       HsaltFile          = 'HSALT_420x384_arctic.cube81',
