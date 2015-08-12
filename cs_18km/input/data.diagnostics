@@ -21,31 +21,26 @@
 # SIvice   SEAICE merid. ice velocity, >0 from South to North (m/s)
 # SIhsnow  SEAICE snow thickness (m)
 # SIhsalt  SEAICE effective salinity (g/m^2)
+# SIqneti  Ice Covered Part of SIqnet, turb+rad, >0 decr theta (W/m^2)
+# SIqneto  Open Ocean Part of SIqnet, turb+rad, >0 decr theta (W/m^2)
+# oceFWflx net surface Fresh-Water flux into ocean, >0 decreases salinity (kg/m^2/s)
+# oceQnet  net surface heat flux into the ocean, >0 increases theta (W/m^2)
+# EXFhl    Latent heat flux into ocean, >0 increases theta (W/m^2)
+# EXFhs    Sensible heat flux into ocean, >0 increases theta (W/m^2)
 # oceSPflx net surface Salt flux rejected into the ocean during freezing (g/m^2/s), (+=down) 
 # oceSPDep Salt plume depth based on density criterion (>0) (m)
 #
-#
-# monthly 2-D fields:
-# ===================
-# EXFhl    Latent heat flux into ocean, >0 increases theta (W/m^2)
-# EXFhs    Sensible heat flux into ocean, >0 increases theta (W/m^2)
-# oceFWflx net surface Fresh-Water flux into ocean, >0 decreases salinity (kg/m^2/s)
-# oceQnet  net surface heat flux into the ocean, >0 increases theta (W/m^2)
-#
-#
-# 3-daily 3-D fields:
+# monthly 3-D fields:
 # ===================
 # 
 # SALTanom Salt anomaly (=SALT-35; g/kg)
 # THETA    Potential Temperature (degC,K)
 # UVELMASS Zonal Mass-Weighted Comp of Velocity (m/s)
 # VVELMASS Meridional Mass-Weighted Comp of Velocity (m/s)
-#
-# monthly 3-D fields:
-# ===================
-#
-# ADVr_TH  degC.m^3/s Vertical   Advective Flux of Pot.Temperature
-# DFrI_TH  degC.m^3/s Vertical Diffusive Flux of Pot.Temperature (Implicit part)
+# ADVr_TH  Vertical   Advective Flux of Pot.Temperature (degC.m^3/s)
+# WTHMASS  Vertical Mass-Weight Transp of Pot Temp (degC.m/s)
+# RHOAnoma Density Anomaly (=Rho-rhoConst) (kg/m^3)
+# DRHODR   Stratification: d.Sigma/dr (kg/m3/m)
 #
  &diagnostics_list
   frequency(1)  = 86400.,
