@@ -20,7 +20,7 @@
  lwdownfile        = 'jra25_dlw',
  uwindfile         = 'jra25_u10m',
  vwindfile         = 'jra25_v10m',
- runofffile        = 'ARDAT_discharge.bin',
+ runofffile        = 'ARDAT_discharge_mps.bin',
  runoftempfile     = 'ARDAT_temperature.bin'
 #
  precipstartdate1  = 19790101,
@@ -52,7 +52,6 @@
  exf_offset_atemp  = 273.15,
  exf_inscal_swdown = -1.,
  exf_inscal_lwdown = -1., 
- exf_inscal_runoff = 3.1710e-08,
  &
 #
  &EXF_NML_04
