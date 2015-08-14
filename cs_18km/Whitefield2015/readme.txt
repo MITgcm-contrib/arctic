@@ -37,7 +37,7 @@ cd ../runARD
 cp ../../MITgcm_contrib/arctic/cs_18km/input/* .
 rm data.obcs_*
 cp ../../MITgcm_contrib/arctic/cs_18km/Whitefield2015/data.exf_ARD data.exf
-ln -sf ../../ARDAT/ARDAT_discharge.bin .
+ln -sf ../../ARDAT/ARDAT_discharge_mps.bin .
 ln -sf ../../run_template_cube81/*.bin .
 rm runoff1p2472-360x180x12.bin
 ln -sf ../../run_template_cube81/BATHY_cube81_420x384_arctic .
@@ -54,7 +54,7 @@ cd ../runARDAT
 cp ../../MITgcm_contrib/arctic/cs_18km/input/* .
 rm data.obcs_*
 cp ../../MITgcm_contrib/arctic/cs_18km/Whitefield2015/data.exf_ARDAT data.exf
-ln -sf ../../ARDAT/ARDAT_discharge.bin .
+ln -sf ../../ARDAT/ARDAT_discharge_mps.bin .
 ln -sf ../../ARDAT/ARDAT_temperature.bin .
 ln -sf ../../run_template_cube81/*.bin .
 rm runoff1p2472-360x180x12.bin
