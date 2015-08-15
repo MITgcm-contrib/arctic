@@ -38,6 +38,14 @@ rm jra25_rain_n*
 ln -sf ../build/mitgcmuv .
 qsub run_arctic_cs_18km_nas
 
+-> ftp://ecco2.jpl.nasa.gov/data1/arctic/arctic_18km/GRACErunoff/matlab/
+   ftp://ecco2.jpl.nasa.gov/data1/arctic/arctic_18km/GRACErunoff/matlab/lookat.m
+   contains some routines for looking at this solution, in particular:
+   ftp://ecco2.jpl.nasa.gov/data1/arctic/arctic_18km/GRACErunoff/figs/FIG9.jpg
+   is a recreation of Figure 9 in Nguyen et al (2011):
+   the results are similar but not identical, e.g., thinner sea ice near
+   Canadian Archipelago for TBD reasons.
+
 ===============
 
 ATN 23-Dec-2013
