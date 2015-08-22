@@ -18,7 +18,7 @@ and river runoff discharge and temperature (runARDAT)
    also available on pfe:/nobackup/hzhang1/forcing/jra25
 
 -> get a copy of ftp://ecco2.jpl.nasa.gov/data2/data/runoff/ARDAT
-   also available on pfe:/nobackup/dmenemen/forcing/ARDAT
+   also available on pfe:/nobackup/dmenemen/forcing/runoff/ARDAT
 
 cvs co MITgcm_contrib/arctic/cs_18km
 cvs co -r checkpoint65m MITgcm_code
