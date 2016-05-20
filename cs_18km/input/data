@@ -35,7 +35,7 @@
  vectorInvariantMomentum=.TRUE.,
  implicitFreeSurface=.TRUE.,
  exactConserv=.TRUE.,
- debuglevel=-1,
+# debuglevel=-1,
  convertFW2Salt=-1
  useSingleCPUio=.TRUE.,
  globalFiles=.TRUE.,
