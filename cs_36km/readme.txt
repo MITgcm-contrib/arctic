@@ -18,6 +18,9 @@ jonny.williams@bristol.ac.uk
 
 4.  Compile in the usual way (system dependent)
 
+NOTE: the ftp sites listed below are no longer available but the files have
+been moved to: https://ecco.jpl.nasa.gov/drive/files/ECCO2/Arctic/arctic_36km
+
 5.  The following files are all required in the run directory
        a. the executable you get when compiling “mitgcmuv”
        b. ftp://ecco2.jpl.nasa.gov/data2/data/runoff/runoff-360x180x12.bin
