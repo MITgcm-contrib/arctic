@@ -1,6 +1,3 @@
-C $Header: /u/gcmpack/MITgcm_contrib/arctic/cs_18km/code/OBCS_OPTIONS.h,v 1.1 2013/12/24 00:08:45 atn Exp $
-C $Name:  $
-
 C CPP options file for OBCS package
 C Use this file for selecting options within the OBCS package
 

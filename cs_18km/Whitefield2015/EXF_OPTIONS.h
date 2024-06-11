@@ -1,6 +1,3 @@
-C $Header: $
-C $Name:  $
-
 CBOP
 C !ROUTINE: EXF_OPTIONS.h
 C !INTERFACE:

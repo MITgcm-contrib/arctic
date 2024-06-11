@@ -1,6 +1,3 @@
-C $Header: /u/gcmpack/MITgcm/model/inc/SIZE.h,v 1.28 2009/05/17 21:15:07 jmc Exp $
-C $Name:  $
-C
 CBOP
 C    !ROUTINE: SIZE.h
 C    !INTERFACE:

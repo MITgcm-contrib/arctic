@@ -1,7 +1,3 @@
-C $Header: /u/gcmpack/MITgcm_contrib/arctic/cs_36km/code/DIAGNOSTICS_SIZE.h,v 1.2 2013/10/21 19:46:56 heimbach Exp $
-C $Name:  $
-
-
 C     Diagnostics Array Dimension
 C     ---------------------------
 C     ndiagMax   :: maximum total number of available diagnostics

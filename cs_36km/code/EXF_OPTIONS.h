@@ -1,6 +1,3 @@
-C $Header: /u/gcmpack/MITgcm_contrib/arctic/cs_36km/code/EXF_OPTIONS.h,v 1.1 2013/10/18 21:06:45 dimitri Exp $
-C $Name:  $
-
 CBOP
 C !ROUTINE: EXF_OPTIONS.h
 C !INTERFACE:

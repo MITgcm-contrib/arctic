@@ -1,6 +1,3 @@
-C $Header: /u/gcmpack/MITgcm_contrib/arctic/cs_36km/code/CPP_OPTIONS.h,v 1.1 2013/10/18 21:06:44 dimitri Exp $
-C $Name:  $
-
 #ifndef CPP_OPTIONS_H
 #define CPP_OPTIONS_H
 

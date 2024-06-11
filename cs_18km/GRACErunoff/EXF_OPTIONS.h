@@ -1,6 +1,3 @@
-C $Header: /u/gcmpack/MITgcm_contrib/arctic/cs_18km/Whitefield2015/EXF_OPTIONS.h,v 1.1 2015/08/10 21:37:33 dimitri Exp $
-C $Name:  $
-
 CBOP
 C !ROUTINE: EXF_OPTIONS.h
 C !INTERFACE:

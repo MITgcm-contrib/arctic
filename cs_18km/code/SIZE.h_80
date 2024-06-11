@@ -1,6 +1,3 @@
-C $Header: /u/gcmpack/MITgcm/model/inc/SIZE.h,v 1.27 2005/09/19 18:42:35 baylor Exp $
-C $Name:  $
-C
 CBOP
 C    !ROUTINE: SIZE.h
 C    !INTERFACE:

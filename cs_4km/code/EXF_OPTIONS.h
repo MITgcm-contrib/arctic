@@ -1,6 +1,3 @@
-C $Header: /u/gcmpack/MITgcm_contrib/high_res_cube/code-mods/EXF_OPTIONS.h,v 1.3 2007/12/06 21:01:13 dimitri Exp $
-C $Name:  $
-
 #ifndef EXF_OPTIONS_H
 #define EXF_OPTIONS_H
 #include "PACKAGES_CONFIG.h"

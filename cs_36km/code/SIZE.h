@@ -1,5 +1,3 @@
-C $Header: /u/gcmpack/MITgcm_contrib/arctic/cs_36km/code/SIZE.h,v 1.1 2013/10/18 21:06:45 dimitri Exp $
-C
 CBOP
 C    !ROUTINE: SIZE.h
 C    !INTERFACE:
