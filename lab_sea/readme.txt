@@ -15,10 +15,12 @@
   ../tools/genmake2 -mo ../../arctic/lab_sea/code
   make depend
   make -j
-
+  note: if using macbook air, use -j8 instead. Otherwise it will try to use more cores than available. 
 ==============
 # 3. Instructions for running simulation
   cd ../run
   ln -sf ../build/mitgcmuv .
   cp ../../arctic/lab_sea/input/* .
   ./mitgcmuv
+
+
