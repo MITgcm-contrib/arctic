@@ -78,6 +78,9 @@ C     TAUY    :: meridional wind stress over seaice at V point
       _RL sig1   (1-OLx:sNx+OLx,1-OLy:sNy+OLy)
       _RL sig2   (1-OLx:sNx+OLx,1-OLy:sNy+OLy)
       _RL sig12  (1-OLx:sNx+OLx,1-OLy:sNy+OLy)
+      _RL sigma11   (1-OLx:sNx+OLx,1-OLy:sNy+OLy)
+      _RL sigma22   (1-OLx:sNx+OLx,1-OLy:sNy+OLy)
+      _RL sigma12   (1-OLx:sNx+OLx,1-OLy:sNy+OLy)
       _RL sigp, sigm, sigTmp, recip_prs
       _RL areaW, areaS, COSWAT
       _RS SINWAT
@@ -85,6 +88,9 @@ C     TAUY    :: meridional wind stress over seaice at V point
       LOGICAL diag_SIsigma_isOn, diag_SIshear_isOn
       LOGICAL diag_SIenpi_isOn, diag_SIenpot_isOn
       LOGICAL diag_SIpRfric_isOn, diag_SIpSfric_isOn
+CEAW[
+      LOGICAL diag_SIsig_isOn
+CEAW] 
 chzh[
       LOGICAL diag_SIstr_isOn
 chzh]
@@ -451,6 +457,11 @@ C     first recompute strainrates from up-to-date velocities
        diag_SIenpot_isOn  = DIAGNOSTICS_IS_ON('SIenpot ',myThid)
        diag_SIpRfric_isOn = DIAGNOSTICS_IS_ON('SIpRfric',myThid)
        diag_SIpSfric_isOn = DIAGNOSTICS_IS_ON('SIpSfric',myThid)
+CEAW[
+       diag_SIsig_isOn    = DIAGNOSTICS_IS_ON('SIsigm11',myThid)
+     &                 .OR. DIAGNOSTICS_IS_ON('SIsigm22',myThid)
+     &                 .OR. DIAGNOSTICS_IS_ON('SIsigm12',myThid)
+CEAW]
 chzh[
        diag_SIstr_isOn    = DIAGNOSTICS_IS_ON('SIstre11 ',myThid)
      &                 .OR. DIAGNOSTICS_IS_ON('SIstre22 ',myThid)
@@ -458,6 +469,9 @@ chzh[
 chzh]
        IF ( diag_SIsigma_isOn  .OR. diag_SIshear_isOn .OR.
      &      diag_SIenpi_isOn   .OR. diag_SIenpot_isOn .OR.
+CEAW[
+     &      diag_SIsig_isOn    .OR.
+CEAW]
 chzh[
      &      diag_SIstr_isOn    .OR.
 chzh]
@@ -513,6 +527,8 @@ C     PRESS = PRESS(n-1), n = number of sub-cycling steps
      I          e11, e22, e12, press, zeta, eta, etaZ,
      O          sig1, sig2, sig12,
      I          bi, bj, myTime, myIter, myThid )
+
+
            DO j=1,sNy
             DO i=1,sNx
              sigp   = sig1(i,j) + sig2(i,j)
@@ -534,11 +550,21 @@ C     in different way to get meaningfull sig12C (=sigTmp):
      &            recip_prs = 1. _d 0 / press0(i,j,bi,bj)
              sig1(i,j) = 0.5 _d 0*(sigp + sigTmp)*recip_prs
              sig2(i,j) = 0.5 _d 0*(sigp - sigTmp)*recip_prs
+CEAW[
+             sigma11(i,j)  = 0.5 _d 0*(sigp + sigm)
+             sigma22(i,j)  = 0.5 _d 0*(sigp - sigm)
+             sigma12(i,j)  = sig12(i,j)
+CEAW]
             ENDDO
            ENDDO
           ENDIF
           CALL DIAGNOSTICS_FILL(sig1,'SIsig1  ',0,1,2,bi,bj,myThid)
           CALL DIAGNOSTICS_FILL(sig2,'SIsig2  ',0,1,2,bi,bj,myThid)
+CEAW[
+          CALL DIAGNOSTICS_FILL(sigma11,'SIsigm11',0,1,2,bi,bj,myThid)
+          CALL DIAGNOSTICS_FILL(sigma22,'SIsigm22',0,1,2,bi,bj,myThid)
+          CALL DIAGNOSTICS_FILL(sigma12,'SIsigm12',0,1,2,bi,bj,myThid)
+CEAW]
          ENDIF
 C
          IF ( diag_SIshear_isOn  ) THEN

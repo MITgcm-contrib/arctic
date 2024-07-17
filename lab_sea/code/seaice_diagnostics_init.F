@@ -803,6 +803,28 @@ C=============== dynamics ============
       diagCode  = 'SM      M1      '
       CALL DIAGNOSTICS_ADDTOLIST( diagNum,
      I     diagName, diagCode, diagUnits, diagTitle, 0, myThid )
+CEAW[
+      diagName  = 'SIsigm11'
+      diagTitle = 'SEAICE stress sigma11'
+      diagUnits = 'N/m             '
+      diagCode  = 'SM      M1      '
+      CALL DIAGNOSTICS_ADDTOLIST( diagNum,
+     I     diagName, diagCode, diagUnits, diagTitle, 0, myThid )
+
+      diagName  = 'SIsigm22'
+      diagTitle = 'SEAICE stress sigma2'
+      diagUnits = 'N/m             '
+      diagCode  = 'SM      M1      '
+      CALL DIAGNOSTICS_ADDTOLIST( diagNum,
+     I     diagName, diagCode, diagUnits, diagTitle, 0, myThid )
+
+      diagName  = 'SIsigm12'
+      diagTitle = 'SEAICE stress sigma12'
+      diagUnits = 'N/m             '
+      diagCode  = 'SM      M1      '
+      CALL DIAGNOSTICS_ADDTOLIST( diagNum,
+     I     diagName, diagCode, diagUnits, diagTitle, 0, myThid )
+CEAW]
 chzh[
       diagName  = 'SIstre11'
       diagTitle = 'SEAICE strain rate e11'
