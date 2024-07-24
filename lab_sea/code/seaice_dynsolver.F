@@ -84,6 +84,10 @@ C     TAUY    :: meridional wind stress over seaice at V point
       _RL sigp, sigm, sigTmp, recip_prs
       _RL areaW, areaS, COSWAT
       _RS SINWAT
+      _RL TILTx (1-OLx:sNx+OLx,1-OLy:sNy+OLy,nSx,nSy)
+      _RL TILTy (1-OLx:sNx+OLx,1-OLy:sNy+OLy,nSx,nSy)
+      _RL SIuvel (1-OLx:sNx+OLx,1-OLy:sNy+OLy)
+      _RL SIvvel (1-OLx:sNx+OLx,1-OLy:sNy+OLy) 
       INTEGER kSrf
       LOGICAL diag_SIsigma_isOn, diag_SIshear_isOn
       LOGICAL diag_SIenpi_isOn, diag_SIenpot_isOn
@@ -288,20 +292,36 @@ C--   basic forcing by wind stress
             FORCEY0(i,j,bi,bj)=TAUY(i,j,bi,bj)
            ENDDO
           ENDDO
-         ENDIF
+	ENDIF
+
+CEAW[
+      IF ( useDiagnostics ) THEN
+       CALL DIAGNOSTICS_FILL(FORCEX0, 'FORCEX0 ',0,1,0,1,1,myThid)
+       CALL DIAGNOSTICS_FILL(FORCEY0, 'FORCEY0 ',0,1,0,1,1,myThid)
+      ENDIF
+CEAW]
+
 
          IF ( SEAICEuseTILT ) THEN
           DO j=1-OLy+1,sNy+OLy
            DO i=1-OLx+1,sNx+OLx
 C--   now add in tilt
-            FORCEX0(i,j,bi,bj)=FORCEX0(i,j,bi,bj)
+	    TILTx(i,j,bi,bj) =  
      &           -seaiceMassU(i,j,bi,bj)*_recip_dxC(i,j,bi,bj)
      &           *( phiSurf(i,j)-phiSurf(i-1,j) )
-            FORCEY0(i,j,bi,bj)=FORCEY0(i,j,bi,bj)
+	    TILTy(i,j,bi,bj) =  
      &           -seaiceMassV(i,j,bi,bj)* _recip_dyC(i,j,bi,bj)
      &           *( phiSurf(i,j)-phiSurf(i,j-1) )
+            FORCEX0(i,j,bi,bj)=FORCEX0(i,j,bi,bj) + TILTx(i,j,bi,bj)
+            FORCEY0(i,j,bi,bj)=FORCEY0(i,j,bi,bj) + TILTy(i,j,bi,bj)
            ENDDO
           ENDDO
+CEAW[
+      IF ( useDiagnostics ) THEN
+       CALL DIAGNOSTICS_FILL(TILTx, 'TILTx   ',0,1,0,1,1,myThid)
+       CALL DIAGNOSTICS_FILL(TILTy, 'TILTy   ',0,1,0,1,1,myThid)
+      ENDIF
+CEAW]
          ENDIF
 
          CALL SEAICE_CALC_ICE_STRENGTH( bi, bj, myTime, myIter, myThid )
@@ -370,7 +390,8 @@ C     Picard solver with Matrix-free Krylov solver (Lemieux et al. 2008)
        STOP 'Adjoint does not work with JFNK solver.'
 #  else
        IF ( SEAICEuseJFNK ) THEN
-C     Jacobian-free Newton Krylov solver (Lemieux et al. 2010, 2012)
+
+C   Jacobian-free Newton Krylov solver (Lemieux et al. 2010, 2012)
         CALL SEAICE_JFNK( myTime, myIter, myThid )
        ENDIF
 #  endif /*  ALLOW_AUTODIFF */
@@ -409,12 +430,14 @@ c in open water areas (drift of zero thickness ice)
            uIce(i,j,bi,bj)=
      &          MAX(MIN(uIce(i,j,bi,bj),0.40 _d +00),-0.40 _d +00)
            vIce(i,j,bi,bj)=
-     &          MAX(MIN(vIce(i,j,bi,bj),0.40 _d +00),-0.40 _d +00)
+     &          MAX(MIN(vIce(i,j,bi,bj),0.40 _d +00),-0.40 _d +00)  
           ENDDO
          ENDDO
         ENDDO
        ENDDO
       ENDIF
+
+      
 #endif /* SEAICE_ALLOW_CLIPVELS */
 
 #if ( defined ALLOW_DIAGNOSTICS && defined SEAICE_CGRID )
@@ -454,6 +477,10 @@ C     first recompute strainrates from up-to-date velocities
      &                 .OR. DIAGNOSTICS_IS_ON('SIsig2  ',myThid)
        diag_SIshear_isOn  = DIAGNOSTICS_IS_ON('SIshear ',myThid)
        diag_SIenpi_isOn   = DIAGNOSTICS_IS_ON('SIenpi  ',myThid)
+     &                 .OR. DIAGNOSTICS_IS_ON('divsigx ',myThid)
+     &                 .OR. DIAGNOSTICS_IS_ON('divsigy ',myThid)
+     &                 .OR. DIAGNOSTICS_IS_ON('SIuvel  ',myThid)
+     &                 .OR. DIAGNOSTICS_IS_ON('SIvvel  ',myThid)
        diag_SIenpot_isOn  = DIAGNOSTICS_IS_ON('SIenpot ',myThid)
        diag_SIpRfric_isOn = DIAGNOSTICS_IS_ON('SIpRfric',myThid)
        diag_SIpSfric_isOn = DIAGNOSTICS_IS_ON('SIpSfric',myThid)
@@ -528,6 +555,11 @@ C     PRESS = PRESS(n-1), n = number of sub-cycling steps
      O          sig1, sig2, sig12,
      I          bi, bj, myTime, myIter, myThid )
 
+CEAW[
+          CALL DIAGNOSTICS_FILL(sig1,'SIsigm11',0,1,2,bi,bj,myThid)
+          CALL DIAGNOSTICS_FILL(sig2,'SIsigm22',0,1,2,bi,bj,myThid)
+          CALL DIAGNOSTICS_FILL(sig12,'SIsigm12',0,1,2,bi,bj,myThid)
+CEAW]
 
            DO j=1,sNy
             DO i=1,sNx
@@ -551,9 +583,9 @@ C     in different way to get meaningfull sig12C (=sigTmp):
              sig1(i,j) = 0.5 _d 0*(sigp + sigTmp)*recip_prs
              sig2(i,j) = 0.5 _d 0*(sigp - sigTmp)*recip_prs
 CEAW[
-             sigma11(i,j)  = 0.5 _d 0*(sigp + sigm)
-             sigma22(i,j)  = 0.5 _d 0*(sigp - sigm)
-             sigma12(i,j)  = sig12(i,j)
+C             sigma11(i,j)  = 0.5 _d 0*(sigp + sigm)
+C             sigma22(i,j)  = 0.5 _d 0*(sigp - sigm)
+C             sigma12(i,j)  = sig12(i,j)
 CEAW]
             ENDDO
            ENDDO
@@ -561,9 +593,9 @@ CEAW]
           CALL DIAGNOSTICS_FILL(sig1,'SIsig1  ',0,1,2,bi,bj,myThid)
           CALL DIAGNOSTICS_FILL(sig2,'SIsig2  ',0,1,2,bi,bj,myThid)
 CEAW[
-          CALL DIAGNOSTICS_FILL(sigma11,'SIsigm11',0,1,2,bi,bj,myThid)
-          CALL DIAGNOSTICS_FILL(sigma22,'SIsigm22',0,1,2,bi,bj,myThid)
-          CALL DIAGNOSTICS_FILL(sigma12,'SIsigm12',0,1,2,bi,bj,myThid)
+C          CALL DIAGNOSTICS_FILL(sigma11,'SIsigm11',0,1,2,bi,bj,myThid)
+C          CALL DIAGNOSTICS_FILL(sigma22,'SIsigm22',0,1,2,bi,bj,myThid)
+C          CALL DIAGNOSTICS_FILL(sigma12,'SIsigm12',0,1,2,bi,bj,myThid)
 CEAW]
          ENDIF
 C
@@ -594,7 +626,11 @@ chzh[
           CALL DIAGNOSTICS_FILL(sig2, 'SIstre22',0,1,2,bi,bj,myThid)
           CALL DIAGNOSTICS_FILL(sig12,'SIstre12',0,1,2,bi,bj,myThid)
          ENDIF
-chzh]
+c     hzh]
+
+
+
+         
 C
 C     most of the energy diagnostics, re-use sig1, sig2, sig12 as tmp-arrays
 C
@@ -610,9 +646,34 @@ C     therefore we need to use new arrays
 # else /* not ALLOW_AUTODIFF */
      O         stressDivergenceX, stressDivergenceY,
 # endif /* ALLOW_AUTODIFF */
-     I         bi, bj, myTime, myIter, myThid )
+     I           bi, bj, myTime, myIter, myThid )
+
+CEAW[
+C          CALL DIAGNOSTICS_FILL(uIce,'SIuvel  ',0,1,2,bi,bj,myThid)
+C          CALL DIAGNOSTICS_FILL(vIce,'SIvvel  ',0,1,2,bi,bj,myThid)
+CEAW]          
           DO j=1,sNy+1
-           DO i=1,sNx+1
+             DO i=1,sNx+1
+# ifdef ALLOW_AUTODIFF
+                sig1(i,j) = strDivX(i,j,bi,bj)
+                sig2(i,j) = strDivY(i,j,bi,bj)
+# ELSE /* not ALLOW_AUTODIFF */
+                sig1(i,j) = stressDivergenceX(i,j,bi,bj)
+                sig2(i,j) = stressDivergenceY(i,j,bi,bj)
+# endif /* ALLOW_AUTODIFF */
+                SIuvel(i,j) = uIce(i,j,bi,bj)
+                SIvvel(i,j) = vIce(i,j,bi,bj)
+             ENDDO
+          ENDDO
+CEAW[
+          CALL DIAGNOSTICS_FILL(sig1,'divsigx ',0,1,2,bi,bj,myThid)
+          CALL DIAGNOSTICS_FILL(sig2,'divsigy ',0,1,2,bi,bj,myThid)
+          CALL DIAGNOSTICS_FILL(SIuvel,'SIuvel  ',0,1,2,bi,bj,myThid)
+          CALL DIAGNOSTICS_FILL(SIvvel,'SIvvel  ',0,1,2,bi,bj,myThid)
+CEAW]
+          
+          DO j=1,sNy+1
+             DO i=1,sNx+1
 # ifdef ALLOW_AUTODIFF
             sig1(i,j) = uIce(i,j,bi,bj)*strDivX(i,j,bi,bj)
             sig2(i,j) = vIce(i,j,bi,bj)*strDivY(i,j,bi,bj)
@@ -620,7 +681,8 @@ C     therefore we need to use new arrays
             sig1(i,j) = uIce(i,j,bi,bj)*stressDivergenceX(i,j,bi,bj)
             sig2(i,j) = vIce(i,j,bi,bj)*stressDivergenceY(i,j,bi,bj)
 # endif /* ALLOW_AUTODIFF */
-           ENDDO
+
+            ENDDO
           ENDDO
 C     average from velocity points to pressure points
           DO j=1,sNy
