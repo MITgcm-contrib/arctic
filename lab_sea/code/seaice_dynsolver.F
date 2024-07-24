@@ -78,21 +78,25 @@ C     TAUY    :: meridional wind stress over seaice at V point
       _RL sig1   (1-OLx:sNx+OLx,1-OLy:sNy+OLy)
       _RL sig2   (1-OLx:sNx+OLx,1-OLy:sNy+OLy)
       _RL sig12  (1-OLx:sNx+OLx,1-OLy:sNy+OLy)
+CEAW[ Define sigma variables      
       _RL sigma11   (1-OLx:sNx+OLx,1-OLy:sNy+OLy)
       _RL sigma22   (1-OLx:sNx+OLx,1-OLy:sNy+OLy)
       _RL sigma12   (1-OLx:sNx+OLx,1-OLy:sNy+OLy)
+CEAW]
       _RL sigp, sigm, sigTmp, recip_prs
       _RL areaW, areaS, COSWAT
       _RS SINWAT
+CEAW[ Define sea surface tilt and seaice velocities (used at same timestep)
       _RL TILTx (1-OLx:sNx+OLx,1-OLy:sNy+OLy,nSx,nSy)
       _RL TILTy (1-OLx:sNx+OLx,1-OLy:sNy+OLy,nSx,nSy)
       _RL SIuvel (1-OLx:sNx+OLx,1-OLy:sNy+OLy)
       _RL SIvvel (1-OLx:sNx+OLx,1-OLy:sNy+OLy) 
+CEAW]
       INTEGER kSrf
       LOGICAL diag_SIsigma_isOn, diag_SIshear_isOn
       LOGICAL diag_SIenpi_isOn, diag_SIenpot_isOn
       LOGICAL diag_SIpRfric_isOn, diag_SIpSfric_isOn
-CEAW[
+CEAW[ Create logical for when I want to output sigma tensor
       LOGICAL diag_SIsig_isOn
 CEAW] 
 chzh[
@@ -294,7 +298,7 @@ C--   basic forcing by wind stress
           ENDDO
 	ENDIF
 
-CEAW[
+CEAW[ Based on the above block, save FORCE regardless of which if statement
       IF ( useDiagnostics ) THEN
        CALL DIAGNOSTICS_FILL(FORCEX0, 'FORCEX0 ',0,1,0,1,1,myThid)
        CALL DIAGNOSTICS_FILL(FORCEY0, 'FORCEY0 ',0,1,0,1,1,myThid)
@@ -306,6 +310,7 @@ CEAW]
           DO j=1-OLy+1,sNy+OLy
            DO i=1-OLx+1,sNx+OLx
 C--   now add in tilt
+CEAW[ Separated the tilt portion from FORCE so I can output it
 	    TILTx(i,j,bi,bj) =  
      &           -seaiceMassU(i,j,bi,bj)*_recip_dxC(i,j,bi,bj)
      &           *( phiSurf(i,j)-phiSurf(i-1,j) )
@@ -314,9 +319,10 @@ C--   now add in tilt
      &           *( phiSurf(i,j)-phiSurf(i,j-1) )
             FORCEX0(i,j,bi,bj)=FORCEX0(i,j,bi,bj) + TILTx(i,j,bi,bj)
             FORCEY0(i,j,bi,bj)=FORCEY0(i,j,bi,bj) + TILTy(i,j,bi,bj)
+CEAW]
            ENDDO
           ENDDO
-CEAW[
+CEAW[ Fill the tilt diagnsotc
       IF ( useDiagnostics ) THEN
        CALL DIAGNOSTICS_FILL(TILTx, 'TILTx   ',0,1,0,1,1,myThid)
        CALL DIAGNOSTICS_FILL(TILTy, 'TILTy   ',0,1,0,1,1,myThid)
@@ -477,14 +483,16 @@ C     first recompute strainrates from up-to-date velocities
      &                 .OR. DIAGNOSTICS_IS_ON('SIsig2  ',myThid)
        diag_SIshear_isOn  = DIAGNOSTICS_IS_ON('SIshear ',myThid)
        diag_SIenpi_isOn   = DIAGNOSTICS_IS_ON('SIenpi  ',myThid)
+CEAW[ Add divsig and SIuvel to this flag based on structure of calcs       
      &                 .OR. DIAGNOSTICS_IS_ON('divsigx ',myThid)
      &                 .OR. DIAGNOSTICS_IS_ON('divsigy ',myThid)
      &                 .OR. DIAGNOSTICS_IS_ON('SIuvel  ',myThid)
      &                 .OR. DIAGNOSTICS_IS_ON('SIvvel  ',myThid)
+CEAW]       
        diag_SIenpot_isOn  = DIAGNOSTICS_IS_ON('SIenpot ',myThid)
        diag_SIpRfric_isOn = DIAGNOSTICS_IS_ON('SIpRfric',myThid)
        diag_SIpSfric_isOn = DIAGNOSTICS_IS_ON('SIpSfric',myThid)
-CEAW[
+CEAW[ Create new statement for sigma tensor diagnostics
        diag_SIsig_isOn    = DIAGNOSTICS_IS_ON('SIsigm11',myThid)
      &                 .OR. DIAGNOSTICS_IS_ON('SIsigm22',myThid)
      &                 .OR. DIAGNOSTICS_IS_ON('SIsigm12',myThid)
@@ -496,7 +504,7 @@ chzh[
 chzh]
        IF ( diag_SIsigma_isOn  .OR. diag_SIshear_isOn .OR.
      &      diag_SIenpi_isOn   .OR. diag_SIenpot_isOn .OR.
-CEAW[
+CEAW[ Adding my new statement to the if statement 
      &      diag_SIsig_isOn    .OR.
 CEAW]
 chzh[
@@ -555,7 +563,7 @@ C     PRESS = PRESS(n-1), n = number of sub-cycling steps
      O          sig1, sig2, sig12,
      I          bi, bj, myTime, myIter, myThid )
 
-CEAW[
+CEAW[ Filling the sigma tensor diagnostics immediately from stress routine
           CALL DIAGNOSTICS_FILL(sig1,'SIsigm11',0,1,2,bi,bj,myThid)
           CALL DIAGNOSTICS_FILL(sig2,'SIsigm22',0,1,2,bi,bj,myThid)
           CALL DIAGNOSTICS_FILL(sig12,'SIsigm12',0,1,2,bi,bj,myThid)
@@ -582,21 +590,11 @@ C     in different way to get meaningfull sig12C (=sigTmp):
      &            recip_prs = 1. _d 0 / press0(i,j,bi,bj)
              sig1(i,j) = 0.5 _d 0*(sigp + sigTmp)*recip_prs
              sig2(i,j) = 0.5 _d 0*(sigp - sigTmp)*recip_prs
-CEAW[
-C             sigma11(i,j)  = 0.5 _d 0*(sigp + sigm)
-C             sigma22(i,j)  = 0.5 _d 0*(sigp - sigm)
-C             sigma12(i,j)  = sig12(i,j)
-CEAW]
             ENDDO
            ENDDO
           ENDIF
           CALL DIAGNOSTICS_FILL(sig1,'SIsig1  ',0,1,2,bi,bj,myThid)
           CALL DIAGNOSTICS_FILL(sig2,'SIsig2  ',0,1,2,bi,bj,myThid)
-CEAW[
-C          CALL DIAGNOSTICS_FILL(sigma11,'SIsigm11',0,1,2,bi,bj,myThid)
-C          CALL DIAGNOSTICS_FILL(sigma22,'SIsigm22',0,1,2,bi,bj,myThid)
-C          CALL DIAGNOSTICS_FILL(sigma12,'SIsigm12',0,1,2,bi,bj,myThid)
-CEAW]
          ENDIF
 C
          IF ( diag_SIshear_isOn  ) THEN
@@ -648,10 +646,6 @@ C     therefore we need to use new arrays
 # endif /* ALLOW_AUTODIFF */
      I           bi, bj, myTime, myIter, myThid )
 
-CEAW[
-C          CALL DIAGNOSTICS_FILL(uIce,'SIuvel  ',0,1,2,bi,bj,myThid)
-C          CALL DIAGNOSTICS_FILL(vIce,'SIvvel  ',0,1,2,bi,bj,myThid)
-CEAW]          
           DO j=1,sNy+1
              DO i=1,sNx+1
 # ifdef ALLOW_AUTODIFF
@@ -665,7 +659,9 @@ CEAW]
                 SIvvel(i,j) = vIce(i,j,bi,bj)
              ENDDO
           ENDDO
-CEAW[
+CEAW[ Filling div sig diagnostics immediately after the stress div routine
+C     regardless of the ALLOW_AUTODIFF option. Also outputting velocities
+C     to ensure I have the same step as the other calculations.      
           CALL DIAGNOSTICS_FILL(sig1,'divsigx ',0,1,2,bi,bj,myThid)
           CALL DIAGNOSTICS_FILL(sig2,'divsigy ',0,1,2,bi,bj,myThid)
           CALL DIAGNOSTICS_FILL(SIuvel,'SIuvel  ',0,1,2,bi,bj,myThid)
