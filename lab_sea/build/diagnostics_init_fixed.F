@@ -1,0 +1,1 @@
+../../../MITgcm//pkg/diagnostics/diagnostics_init_fixed.F

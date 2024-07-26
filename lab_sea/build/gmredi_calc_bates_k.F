@@ -1,0 +1,1 @@
+../../../MITgcm//pkg/gmredi/gmredi_calc_bates_k.F

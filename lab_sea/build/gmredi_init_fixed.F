@@ -1,0 +1,1 @@
+../../../MITgcm//pkg/gmredi/gmredi_init_fixed.F

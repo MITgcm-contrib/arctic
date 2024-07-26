@@ -1,0 +1,1 @@
+../../../MITgcm//pkg/diagnostics/diagnostics_mnc_out.F
