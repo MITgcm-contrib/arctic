@@ -294,7 +294,39 @@ c     diagCode  = 'VV      U1      '
 c     diagMate  = diagNum
 c     CALL DIAGNOSTICS_ADDTOLIST( diagNum,
 c    I     diagName, diagCode, diagUnits, diagTitle, diagMate, myThid )
+CEAW[
+      diagName  = 'SItauXio'
+      diagTitle = 'SEAICE tau_io x component'
+      diagUnits = 'N/m^2           '
+      diagCode  = 'UU      U1      '
+      diagMate  = diagNum + 2
+      CALL DIAGNOSTICS_ADDTOLIST( diagNum,
+     I     diagName, diagCode, diagUnits, diagTitle, diagMate, myThid )
 
+      diagName  = 'SItauYio'
+      diagTitle = 'SEAICE tau_io y component'
+      diagUnits = 'N/m^2           '
+      diagCode  = 'VV      U1      '
+      diagMate  = diagNum
+      CALL DIAGNOSTICS_ADDTOLIST( diagNum,
+     I     diagName, diagCode, diagUnits, diagTitle, diagMate, myThid )
+
+      diagName  = 'SItauXai'
+      diagTitle = 'SEAICE tau_ai x component'
+      diagUnits = 'N/m^2           '
+      diagCode  = 'UU      U1      '
+      diagMate  = diagNum + 2
+      CALL DIAGNOSTICS_ADDTOLIST( diagNum,
+     I     diagName, diagCode, diagUnits, diagTitle, diagMate, myThid )
+
+      diagName  = 'SItauYai'
+      diagTitle = 'SEAICE tau_ai y component'
+      diagUnits = 'N/m^2           '
+      diagCode  = 'VV      U1      '
+      diagMate  = diagNum
+      CALL DIAGNOSTICS_ADDTOLIST( diagNum,
+     I     diagName, diagCode, diagUnits, diagTitle, diagMate, myThid )
+CEAW]      
       diagName  = 'SItaux  '
       diagTitle = 'SEAICE zonal surface wind stress, >0 increases uIce'
       diagUnits = 'N/m^2           '
