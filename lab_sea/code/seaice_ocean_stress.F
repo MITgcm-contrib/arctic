@@ -138,20 +138,19 @@ CEAW[ = interp(DWATN, Y)*coswat *( vIce - vVel ) + sign*DWATN/2 * interp(uIce - 
      &         * SEAICEstressFactor
           areaS = 0.5 _d 0 * (AREA(I,J,bi,bj) + AREA(I,J-1,bi,bj))
      &         * SEAICEstressFactor
-CEAW[ OUTPUT TOTAL STRESS HERE REGARDLESS OF THE METHOD CALCULATED!!! fu = tau_ai and fuIceLoc= tau_io
-          tauxio(i,j,bi,bj) = fuIceLoc
-          tauyio(i,j,bi,bj) = fvIceLoc
-          tauxai(i,j,bi,bj) = fu(i,j,bi,bj)
-          tauyai(i,j,bi,bj) = fv(i,j,bi,bj)
+CEAW[ 
+          tauxio(I,J,bi,bj) = fuIceLoc
+          tauyio(I,J,bi,bj) = fvIceLoc
+          tauxai(I,J,bi,bj) = fu(i,j,bi,bj)
+          tauyai(I,J,bi,bj) = fv(i,j,bi,bj)
 CEAW]
           fu(I,J,bi,bj)=(ONE-areaW)*fu(I,J,bi,bj)+areaW*fuIceLoc
           fv(I,J,bi,bj)=(ONE-areaS)*fv(I,J,bi,bj)+areaS*fvIceLoc
          ENDDO
         ENDDO
-       ENDDO
+      ENDDO
       ENDDO
       ENDIF
-      CALL EXCH_UV_XY_RS(fu, fv, .TRUE., myThid)
 CEAW[ 
       IF ( useDiagnostics ) THEN
        CALL DIAGNOSTICS_FILL(tauxio, 'SItauXio',0,1,0,1,1,myThid)
@@ -160,5 +159,6 @@ CEAW[
        CALL DIAGNOSTICS_FILL(tauyai, 'SItauYai',0,1,0,1,1,myThid)
       ENDIF
 CEAW]
+      CALL EXCH_UV_XY_RS(fu, fv, .TRUE., myThid)
       RETURN
       END
