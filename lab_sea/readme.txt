@@ -18,7 +18,7 @@ Install gfortran using brew: brew install gcc
 ==============
 # 2. Build executable
   cd build
-  ../tools/genmake2 -mo ../../arctic/lab_sea/code
+  ../../../MITgcm/tools/genmake2 -rootdir ../../../MITgcm/ -mo ../code
   make depend
   make -j
   note: if using macbook air, use -j8 instead. Otherwise it will try to use more cores than available. 
