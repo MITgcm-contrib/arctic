@@ -59,6 +59,7 @@ C     === Local variables ===
 C     i,j    :: Loop counters
 C     bi,bj  :: tile counters
       INTEGER i, j, bi, bj
+C      INTEGER picardIter
 #ifdef SEAICE_CGRID
 # ifndef ALLOW_AUTODIFF
       _RL mask_uice, mask_vice
@@ -92,6 +93,36 @@ CEAW[ Define sea surface tilt and seaice velocities (used at same timestep)
       _RL SIuvel (1-OLx:sNx+OLx,1-OLy:sNy+OLy)
       _RL SIvvel (1-OLx:sNx+OLx,1-OLy:sNy+OLy) 
 CEAW]
+
+CEAW[Copied and pasted from Krylov S/R
+C     u/vIceLHS :: left hand side of momentum equation (A*x)                                                                                                 
+      _RL uIceLHS(1-OLx:sNx+OLx,1-OLy:sNy+OLy,nSx,nSy)
+      _RL vIceLHS(1-OLx:sNx+OLx,1-OLy:sNy+OLy,nSx,nSy)
+C     u/vIceRHS :: right hand side of momentum equation (b)                                                                                                  
+      _RL uIceRHS(1-OLx:sNx+OLx,1-OLy:sNy+OLy,nSx,nSy)
+      _RL vIceRHS(1-OLx:sNx+OLx,1-OLy:sNy+OLy,nSx,nSy)
+C     The residual uIceLHS - uIceRHS
+      _RL uIceRES(1-OLx:sNx+OLx,1-OLy:sNy+OLy,nSx,nSy)
+      _RL vIceRES(1-OLx:sNx+OLx,1-OLy:sNy+OLy,nSx,nSy)
+CEAW]
+
+CEAW[ Splitting the RHS into separate terms                                                                                                                  
+C      _RL uRHS1(1-OLx:sNx+OLx,1-OLy:sNy+OLy,nSx,nSy)
+C      _RL vRHS1(1-OLx:sNx+OLx,1-OLy:sNy+OLy,nSx,nSy)
+C      _RL uRHS2(1-OLx:sNx+OLx,1-OLy:sNy+OLy,nSx,nSy)
+C      _RL vRHS2(1-OLx:sNx+OLx,1-OLy:sNy+OLy,nSx,nSy)
+CEAW]
+CEAW[ Splitting the LHS into separate terms                                                                                                                  
+C      _RL uLHS0(1-OLx:sNx+OLx,1-OLy:sNy+OLy,nSx,nSy)
+C      _RL vLHS0(1-OLx:sNx+OLx,1-OLy:sNy+OLy,nSx,nSy)
+C      _RL uLHS1(1-OLx:sNx+OLx,1-OLy:sNy+OLy,nSx,nSy)
+C      _RL vLHS1(1-OLx:sNx+OLx,1-OLy:sNy+OLy,nSx,nSy)
+C      _RL uLHS2(1-OLx:sNx+OLx,1-OLy:sNy+OLy,nSx,nSy)
+C      _RL vLHS2(1-OLx:sNx+OLx,1-OLy:sNy+OLy,nSx,nSy)
+C      _RL uLHS3(1-OLx:sNx+OLx,1-OLy:sNy+OLy,nSx,nSy)
+C      _RL vLHS3(1-OLx:sNx+OLx,1-OLy:sNy+OLy,nSx,nSy)
+CEAW] 
+      
       INTEGER kSrf
       LOGICAL diag_SIsigma_isOn, diag_SIshear_isOn
       LOGICAL diag_SIenpi_isOn, diag_SIenpot_isOn
@@ -386,7 +417,8 @@ C     Picard solver with LSR scheme (Zhang-J/Hibler 1997), ported to a C-grid
 #  else
        IF ( SEAICEuseKrylov ) THEN
 C     Picard solver with Matrix-free Krylov solver (Lemieux et al. 2008)
-        CALL SEAICE_KRYLOV( myTime, myIter, myThid )
+          PRINT *, 'Krylov activated'
+          CALL SEAICE_KRYLOV( myTime, myIter, myThid )
        ENDIF
 #  endif /*  ALLOW_AUTODIFF */
 # endif /* SEAICE_ALLOW_KRYLOV */
@@ -398,7 +430,8 @@ C     Picard solver with Matrix-free Krylov solver (Lemieux et al. 2008)
        IF ( SEAICEuseJFNK ) THEN
 
 C   Jacobian-free Newton Krylov solver (Lemieux et al. 2010, 2012)
-        CALL SEAICE_JFNK( myTime, myIter, myThid )
+          PRINT *, 'JFNK activated'
+          CALL SEAICE_JFNK( myTime, myIter, myThid )
        ENDIF
 #  endif /*  ALLOW_AUTODIFF */
 # endif /* SEAICE_ALLOW_JFNK */
@@ -407,6 +440,58 @@ C End of IF (SEAICEuseDYNAMICS and DIFFERENT_MULTIPLE ...
       ENDIF
 #endif /* SEAICE_CGRID */
 
+
+
+CEAW[DO: Re-call the RHS and LHS equations, and maybe the residual to output fields.
+CEAW: The below has been copied and pasted from the Krylov S/R. 
+      PRINT *, 'Picard Number is', picardIter
+C     compute rhs that does not change during Krylov iteration           
+       CALL SEAICE_CALC_RHS(
+     O     uIceRHS, vIceRHS, uRHS1, vRHS1, uRHS2, vRHS2, 
+     I     picardIter, 0, myTime, myIter, myThid )
+       
+       CALL SEAICE_CALC_LHS(
+     I         uIce, vIce,
+     O     uIceLHS, vIceLHS,uLHS0,vLHS0,uLHS1,vLHS1,
+     &     uLHS2,vLHS2,uLHS3,vLHS3,
+     I         picardIter, myTime, myIter, myThid )
+C     Calculate the residual                                                                                                                                 
+       DO bj=myByLo(myThid),myByHi(myThid)
+        DO bi=myBxLo(myThid),myBxHi(myThid)
+         DO J=1,sNy
+          DO I=1,sNx
+           uIceRES(I,J,bi,bj) = uIceLHS(I,J,bi,bj) - uIceRHS(I,J,bi,bj)
+           vIceRES(I,J,bi,bj) = vIceLHS(I,J,bi,bj) - vIceRHS(I,J,bi,bj)
+          ENDDO
+         ENDDO
+        ENDDO
+       ENDDO
+CEAW]
+
+CEAW[ Fill the RHS and LHS diagnostic
+       IF ( useDiagnostics ) THEN
+          CALL DIAGNOSTICS_FILL(uIceRHS,'uIceRHS ',0,1,0,1,1,myThid)
+          CALL DIAGNOSTICS_FILL(vIceRHS,'vIceRHS ',0,1,0,1,1,myThid)
+          CALL DIAGNOSTICS_FILL(uIceLHS,'uIceLHS ',0,1,0,1,1,myThid)
+          CALL DIAGNOSTICS_FILL(vIceLHS,'vIceLHS ',0,1,0,1,1,myThid)
+          CALL DIAGNOSTICS_FILL(uIceRES,'uIceRES ',0,1,0,1,1,myThid)
+          CALL DIAGNOSTICS_FILL(vIceRES,'vIceRES ',0,1,0,1,1,myThid)
+          CALL DIAGNOSTICS_FILL(uRHS1,  'urhsFORX',0,1,0,1,1,myThid)
+          CALL DIAGNOSTICS_FILL(vRHS1,  'vrhsFORY',0,1,0,1,1,myThid)
+          CALL DIAGNOSTICS_FILL(uRHS2,  'urhsDWUo',0,1,0,1,1,myThid)
+          CALL DIAGNOSTICS_FILL(vRHS2,  'vrhsDWUo',0,1,0,1,1,myThid)
+          CALL DIAGNOSTICS_FILL(uLHS0,  'ulhsdsig',0,1,0,1,1,myThid)
+          CALL DIAGNOSTICS_FILL(vLHS0,  'vlhsdsig',0,1,0,1,1,myThid)
+          CALL DIAGNOSTICS_FILL(uLHS1,  'ulhsdudt',0,1,0,1,1,myThid)
+          CALL DIAGNOSTICS_FILL(vLHS1,  'vlhsdvdt',0,1,0,1,1,myThid)
+          CALL DIAGNOSTICS_FILL(uLHS2,  'ulhsmfv ',0,1,0,1,1,myThid)
+          CALL DIAGNOSTICS_FILL(vLHS2,  'vlhsmfu ',0,1,0,1,1,myThid)
+          CALL DIAGNOSTICS_FILL(uLHS3,  'ulhsDWUi',0,1,0,1,1,myThid)
+          CALL DIAGNOSTICS_FILL(vLHS3,  'vlhsDWUi',0,1,0,1,1,myThid)          
+      ENDIF
+CEAW] 
+
+       
 C Update ocean surface stress
       IF ( SEAICEupdateOceanStress ) THEN
 #ifdef ALLOW_AUTODIFF_TAMC

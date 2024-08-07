@@ -294,7 +294,7 @@ c     diagCode  = 'VV      U1      '
 c     diagMate  = diagNum
 c     CALL DIAGNOSTICS_ADDTOLIST( diagNum,
 c    I     diagName, diagCode, diagUnits, diagTitle, diagMate, myThid )
-CEAW[
+CEAW[ Adding tau_io and tau_ai diagnostics
       diagName  = 'SItauXio'
       diagTitle = 'SEAICE tau_io x component'
       diagUnits = 'N/m^2           '
@@ -358,7 +358,7 @@ CEAW]
       diagMate  = diagNum
       CALL DIAGNOSTICS_ADDTOLIST( diagNum,
      I     diagName, diagCode, diagUnits, diagTitle, diagMate, myThid )
-CEAW[
+CEAW[ Adding FORCEX0 and tilt diagnostics
       diagName  = 'FORCEX0 '
       diagTitle = 'SeaIce Wind forcing in X momentum equation'
       diagUnits = 'N/m^2           '
@@ -390,10 +390,140 @@ CEAW[
       diagMate  = diagNum
       CALL DIAGNOSTICS_ADDTOLIST( diagNum,
      I     diagName, diagCode, diagUnits, diagTitle, diagMate, myThid )
-
-
+     
 CEAW]
 
+CEAW[ Creating RHS and LHS diagnostics
+      diagName  = 'uIceRHS  '
+      diagTitle = 'Seaice u component velocity for RHS'
+      diagUnits = 'm/s^2           '
+      diagCode  = 'UU      M1      '
+      CALL DIAGNOSTICS_ADDTOLIST( diagNum,
+     I     diagName, diagCode, diagUnits, diagTitle, 0, myThid )
+
+      diagName  = 'vIceRHS  '
+      diagTitle = 'Seaice v component velocity for RHS'
+      diagUnits = 'm/s^2            '
+      diagCode  = 'VV      M1      '
+      CALL DIAGNOSTICS_ADDTOLIST( diagNum,
+     I     diagName, diagCode, diagUnits, diagTitle, 0, myThid )
+
+      diagName  = 'uIceLHS  '
+      diagTitle = 'Seaice u component velocity for LHS'
+      diagUnits = 'm/s^2           '
+      diagCode  = 'UU      M1      '
+      CALL DIAGNOSTICS_ADDTOLIST( diagNum,
+     I     diagName, diagCode, diagUnits, diagTitle, 0, myThid )
+
+      diagName  = 'vIceLHS  '
+      diagTitle = 'Seaice v component velocity for LHS'
+      diagUnits = 'm/s^2            '
+      diagCode  = 'VV      M1      '
+      CALL DIAGNOSTICS_ADDTOLIST( diagNum,
+     I     diagName, diagCode, diagUnits, diagTitle, 0, myThid )      
+
+      diagName  = 'uIceRES  '
+      diagTitle = 'Seaice u component velocity residual LmR'
+      diagUnits = 'm/s^2           '
+      diagCode  = 'UU      M1      '
+      CALL DIAGNOSTICS_ADDTOLIST( diagNum,
+     I     diagName, diagCode, diagUnits, diagTitle, 0, myThid )
+
+      diagName  = 'vIceRES  '
+      diagTitle = 'Seaice v component velocity residual LmR'
+      diagUnits = 'm/s^2            '
+      diagCode  = 'VV      M1      '
+      CALL DIAGNOSTICS_ADDTOLIST( diagNum,
+     I     diagName, diagCode, diagUnits, diagTitle, 0, myThid )
+
+      diagName  = 'urhsFORX'
+      diagTitle = 'Seaice U RHS, FORCEX term'
+      diagUnits = 'm/s^2           '
+      diagCode  = 'UU      M1      '
+      CALL DIAGNOSTICS_ADDTOLIST( diagNum,
+     I     diagName, diagCode, diagUnits, diagTitle, 0, myThid )
+
+      diagName  = 'vrhsFORY'
+      diagTitle = 'Seaice V RHS, FORCEY term'
+      diagUnits = 'm/s^2            '
+      diagCode  = 'VV      M1      '
+      CALL DIAGNOSTICS_ADDTOLIST( diagNum,
+     I     diagName, diagCode, diagUnits, diagTitle, 0, myThid )
+
+      diagName  = 'urhsDWUo'
+      diagTitle = 'Seaice U RHS, DWATN*Uo term'
+      diagUnits = 'm/s^2           '
+      diagCode  = 'UU      M1      '
+      CALL DIAGNOSTICS_ADDTOLIST( diagNum,
+     I     diagName, diagCode, diagUnits, diagTitle, 0, myThid )
+
+      diagName  = 'vrhsDWUo'
+      diagTitle = 'Seaice V RHS, DWATN*Uo term'
+      diagUnits = 'm/s^2            '
+      diagCode  = 'VV      M1      '
+      CALL DIAGNOSTICS_ADDTOLIST( diagNum,
+     I     diagName, diagCode, diagUnits, diagTitle, 0, myThid )
+
+      diagName  = 'ulhsdsig'
+      diagTitle = 'Seaice U LHS, -dsigma/dx term'
+      diagUnits = 'm/s^2           '
+      diagCode  = 'UU      M1      '
+      CALL DIAGNOSTICS_ADDTOLIST( diagNum,
+     I     diagName, diagCode, diagUnits, diagTitle, 0, myThid )
+
+      diagName  = 'vlhsdsig'
+      diagTitle = 'Seaice V LHS, -dsigma/dy term'
+      diagUnits = 'm/s^2            '
+      diagCode  = 'VV      M1      '
+      CALL DIAGNOSTICS_ADDTOLIST( diagNum,
+     I     diagName, diagCode, diagUnits, diagTitle, 0, myThid )
+
+      diagName  = 'ulhsdudt'
+      diagTitle = 'Seaice U LHS, du/dt term'
+      diagUnits = 'm/s^2           '
+      diagCode  = 'UU      M1      '
+      CALL DIAGNOSTICS_ADDTOLIST( diagNum,
+     I     diagName, diagCode, diagUnits, diagTitle, 0, myThid )
+
+      diagName  = 'vlhsdvdt'
+      diagTitle = 'Seaice V LHS, dv/dt term'
+      diagUnits = 'm/s^2            '
+      diagCode  = 'VV      M1      '
+      CALL DIAGNOSTICS_ADDTOLIST( diagNum,
+     I     diagName, diagCode, diagUnits, diagTitle, 0, myThid )
+
+      diagName  = 'ulhsmfv'
+      diagTitle = 'Seaice U LHS, -mfv term'
+      diagUnits = 'm/s^2           '
+      diagCode  = 'UU      M1      '
+      CALL DIAGNOSTICS_ADDTOLIST( diagNum,
+     I     diagName, diagCode, diagUnits, diagTitle, 0, myThid )
+
+      diagName  = 'vlhsmfu'
+      diagTitle = 'Seaice V LHS, +mfu term'
+      diagUnits = 'm/s^2            '
+      diagCode  = 'VV      M1      '
+      CALL DIAGNOSTICS_ADDTOLIST( diagNum,
+     I     diagName, diagCode, diagUnits, diagTitle, 0, myThid )
+
+      diagName  = 'ulhsDWUi'
+      diagTitle = 'Seaice U LHS,DWATN*Ui term'
+      diagUnits = 'm/s^2           '
+      diagCode  = 'UU      M1      '
+      CALL DIAGNOSTICS_ADDTOLIST( diagNum,
+     I     diagName, diagCode, diagUnits, diagTitle, 0, myThid )
+
+      diagName  = 'vlhsDWUi'
+      diagTitle = 'Seaice V LHS, DWATN*Ui term'
+      diagUnits = 'm/s^2            '
+      diagCode  = 'VV      M1      '
+      CALL DIAGNOSTICS_ADDTOLIST( diagNum,
+     I     diagName, diagCode, diagUnits, diagTitle, 0, myThid )
+
+CEAW]                                                                                                                                                         
+
+
+      
 c     diagName  = 'SIuwind '
 c     diagTitle = 'SEAICE zonal 10-m wind speed, >0 increases uVel'
 c     diagUnits = 'm/s             '
@@ -871,7 +1001,7 @@ C=============== dynamics ============
       CALL DIAGNOSTICS_ADDTOLIST( diagNum,
      I     diagName, diagCode, diagUnits, diagTitle, 0, myThid )
 
-CEAW[
+CEAW[ Creating div sigma diagnostics
       diagName  = 'divsigx '
       diagTitle = 'Div Sigma for x component of momentum equation'
       diagUnits = 'N/m^2           '
@@ -885,9 +1015,9 @@ CEAW[
       diagCode  = 'SM      M1      '
       CALL DIAGNOSTICS_ADDTOLIST( diagNum,
      I     diagName, diagCode, diagUnits, diagTitle, 0, myThid )
-C     EAW]
+CEAW]
 
-CEAW[
+CEAW[ Creating SI velocity diagnostics (that are used for div sigma)
       diagName  = 'SIuvel  '
       diagTitle = 'Seaice velocity y-comp used to calculate div sigma'
       diagUnits = 'm/s             '
@@ -904,7 +1034,7 @@ CEAW[
 CEAW]      
 
       
-CEAW[
+CEAW[ Creating sigma diagnostics
       diagName  = 'SIsigm11'
       diagTitle = 'SEAICE stress sigma11'
       diagUnits = 'N/m             '

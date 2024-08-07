@@ -80,7 +80,6 @@ C     stress and internal ice stresses to surface layer of ocean
      &          * SEAICEstressFactor
            fu(I,J,bi,bj)=(ONE-areaW)*fu(I,J,bi,bj)
      &          + areaW*windTauX(I,J,bi,bj)
-CEAW[ PUT STRESS HERE MAYBE? ]          
 #ifdef SEAICE_CGRID
      &          + stressDivergenceX(I,J,bi,bj) * SEAICEstressFactor
 #endif
@@ -122,7 +121,7 @@ C     ice cover
      &         0.5 _d 0*(vIce(I-1,J  ,bi,bj)-vVel(I-1,J  ,kSrf,bi,bj)
      &                  +vIce(I-1,J+1,bi,bj)-vVel(I-1,J+1,kSrf,bi,bj))
      &         )
-CEAW[ = interp(DWATN, Y)*coswat *( vIce - vVel ) + sign*DWATN/2 * interp(uIce - uVel, X)
+CEAW[ = interp(DWATN, Y)*coswat *( vIce - vVel ) + sign*DWATN/2 * interp(uIce - uVel, X)]
           fvIceLoc=HALF*( DWATN(I,J,bi,bj)+DWATN(I,J-1,bi,bj) )*
      &         COSWAT *
      &         ( vIce(I,J,bi,bj)-vVel(I,J,kSrf,bi,bj) )
@@ -138,7 +137,7 @@ CEAW[ = interp(DWATN, Y)*coswat *( vIce - vVel ) + sign*DWATN/2 * interp(uIce - 
      &         * SEAICEstressFactor
           areaS = 0.5 _d 0 * (AREA(I,J,bi,bj) + AREA(I,J-1,bi,bj))
      &         * SEAICEstressFactor
-CEAW[ 
+CEAW[ Creating and defining tau_io and tau_ai before normal calculation
           tauxio(I,J,bi,bj) = fuIceLoc
           tauyio(I,J,bi,bj) = fvIceLoc
           tauxai(I,J,bi,bj) = fu(i,j,bi,bj)
@@ -151,7 +150,7 @@ CEAW]
       ENDDO
       ENDDO
       ENDIF
-CEAW[ 
+CEAW[ Filling tau_io and tau_ai diagnostics
       IF ( useDiagnostics ) THEN
        CALL DIAGNOSTICS_FILL(tauxio, 'SItauXio',0,1,0,1,1,myThid)
        CALL DIAGNOSTICS_FILL(tauyio, 'SItauYio',0,1,0,1,1,myThid)
