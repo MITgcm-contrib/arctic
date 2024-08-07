@@ -56,7 +56,7 @@
  useCDscheme=.TRUE.,
  useSingleCpuIO=.TRUE.,
  readBinaryPrec=32,
- writeBinaryPrec=32,
+ writeBinaryPrec=64,
  &
 
 # Elliptic solver parameters
