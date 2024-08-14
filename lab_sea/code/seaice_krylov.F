@@ -54,7 +54,7 @@ C     === Local variables ===
 C     i,j,bi,bj :: loop indices
       INTEGER i,j,bi,bj
 C     loop indices
-      INTEGER picardIter
+C      INTEGER picardIter
       INTEGER krylovIter, krylovFails
       INTEGER krylovIterMax, picardIterMax
       INTEGER totalKrylovItersLoc, totalPicardItersLoc
