@@ -104,7 +104,7 @@ C     enable JFNK code by defining the following flag
 # undef SEAICE_ALLOW_JFNK
 
 C     enable Krylov code by defining the following flag
-# undef SEAICE_ALLOW_KRYLOV
+#define SEAICE_ALLOW_KRYLOV
 
 C--   Use a different order when mapping 2D velocity arrays to 1D vector
 C     before passing it to FGMRES.
