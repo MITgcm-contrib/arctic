@@ -46,12 +46,7 @@ C     krylovIter :: current iterate of Krylov iteration
 C     u/vIceRHS :: RHS of momentum equations
       _RL uIceRHS(1-OLx:sNx+OLx,1-OLy:sNy+OLy,nSx,nSy)
       _RL vIceRHS(1-OLx:sNx+OLx,1-OLy:sNy+OLy,nSx,nSy)
-CEAW[ Splitting the RHS into separate terms
-C      _RL uRHS1(1-OLx:sNx+OLx,1-OLy:sNy+OLy,nSx,nSy)
-C      _RL uRHS2(1-OLx:sNx+OLx,1-OLy:sNy+OLy,nSx,nSy)
-C      _RL vRHS1(1-OLx:sNx+OLx,1-OLy:sNy+OLy,nSx,nSy)
-C      _RL vRHS2(1-OLx:sNx+OLx,1-OLy:sNy+OLy,nSx,nSy)
-CEAW]
+
 #if ( defined SEAICE_CGRID \
       && ( defined SEAICE_ALLOW_JFNK || defined SEAICE_ALLOW_KRYLOV ) )
 C     i,j,bi,bj,kSrf :: loop indices

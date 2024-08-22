@@ -75,18 +75,6 @@ C     symmetric drag coefficient
 C     fractional area at velocity points
       _RL areaW(1:sNx,1:sNy)
       _RL areaS(1:sNx,1:sNy)
-CEAW[ Creating terms for LHS
-C      _RL stressDivergenceX(1-OLx:sNx+OLx,1-OLy:sNy+OLy,nSx,nSy)
-C      _RL stressDivergenceY(1-OLx:sNx+OLx,1-OLy:sNy+OLy,nSx,nSy)
-C      _RL uLHS0(1-OLx:sNx+OLx,1-OLy:sNy+OLy,nSx,nSy)
-C      _RL vLHS0(1-OLx:sNx+OLx,1-OLy:sNy+OLy,nSx,nSy)
-C      _RL uLHS1(1-OLx:sNx+OLx,1-OLy:sNy+OLy,nSx,nSy)
-C      _RL vLHS1(1-OLx:sNx+OLx,1-OLy:sNy+OLy,nSx,nSy)
-C      _RL uLHS2(1-OLx:sNx+OLx,1-OLy:sNy+OLy,nSx,nSy)
-C      _RL vLHS2(1-OLx:sNx+OLx,1-OLy:sNy+OLy,nSx,nSy)
-C      _RL uLHS3(1-OLx:sNx+OLx,1-OLy:sNy+OLy,nSx,nSy)
-C      _RL vLHS3(1-OLx:sNx+OLx,1-OLy:sNy+OLy,nSx,nSy)
-CEAW]     
 
 #ifdef SEAICE_ALLOW_MOM_ADVECTION
 C     tendency due to advection of momentum

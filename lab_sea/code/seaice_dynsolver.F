@@ -106,23 +106,6 @@ C     The residual uIceLHS - uIceRHS
       _RL vIceRES(1-OLx:sNx+OLx,1-OLy:sNy+OLy,nSx,nSy)
 CEAW]
 
-CEAW[ Splitting the RHS into separate terms                                                                                                                  
-C      _RL uRHS1(1-OLx:sNx+OLx,1-OLy:sNy+OLy,nSx,nSy)
-C      _RL vRHS1(1-OLx:sNx+OLx,1-OLy:sNy+OLy,nSx,nSy)
-C      _RL uRHS2(1-OLx:sNx+OLx,1-OLy:sNy+OLy,nSx,nSy)
-C      _RL vRHS2(1-OLx:sNx+OLx,1-OLy:sNy+OLy,nSx,nSy)
-CEAW]
-CEAW[ Splitting the LHS into separate terms                                                                                                                  
-C      _RL uLHS0(1-OLx:sNx+OLx,1-OLy:sNy+OLy,nSx,nSy)
-C      _RL vLHS0(1-OLx:sNx+OLx,1-OLy:sNy+OLy,nSx,nSy)
-C      _RL uLHS1(1-OLx:sNx+OLx,1-OLy:sNy+OLy,nSx,nSy)
-C      _RL vLHS1(1-OLx:sNx+OLx,1-OLy:sNy+OLy,nSx,nSy)
-C      _RL uLHS2(1-OLx:sNx+OLx,1-OLy:sNy+OLy,nSx,nSy)
-C      _RL vLHS2(1-OLx:sNx+OLx,1-OLy:sNy+OLy,nSx,nSy)
-C      _RL uLHS3(1-OLx:sNx+OLx,1-OLy:sNy+OLy,nSx,nSy)
-C      _RL vLHS3(1-OLx:sNx+OLx,1-OLy:sNy+OLy,nSx,nSy)
-CEAW] 
-      
       INTEGER kSrf
       LOGICAL diag_SIsigma_isOn, diag_SIshear_isOn
       LOGICAL diag_SIenpi_isOn, diag_SIenpot_isOn
@@ -219,6 +202,13 @@ C--   NOW SET UP MASS PER UNIT AREA AND CORIOLIS TERM
         ENDDO
        ENDDO
 
+CEAW[ Output mass
+      IF ( useDiagnostics ) THEN
+       CALL DIAGNOSTICS_FILL(seaiceMassU, 'SImassU ',0,1,0,1,1,myThid)
+       CALL DIAGNOSTICS_FILL(seaiceMassV, 'SImassV ',0,1,0,1,1,myThid)
+      ENDIF
+CEAW]        
+       
 # ifndef ALLOW_AUTODIFF
        IF ( SEAICE_maskRHS ) THEN
 C     dynamic masking of areas with no ice, not recommended
@@ -736,7 +726,7 @@ C     therefore we need to use new arrays
 # ifdef ALLOW_AUTODIFF
                 sig1(i,j) = strDivX(i,j,bi,bj)
                 sig2(i,j) = strDivY(i,j,bi,bj)
-# ELSE /* not ALLOW_AUTODIFF */
+# else /* not ALLOW_AUTODIFF */
                 sig1(i,j) = stressDivergenceX(i,j,bi,bj)
                 sig2(i,j) = stressDivergenceY(i,j,bi,bj)
 # endif /* ALLOW_AUTODIFF */

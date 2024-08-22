@@ -358,6 +358,28 @@ CEAW]
       diagMate  = diagNum
       CALL DIAGNOSTICS_ADDTOLIST( diagNum,
      I     diagName, diagCode, diagUnits, diagTitle, diagMate, myThid )
+
+CEAW[ Adding mass 
+      diagName  = 'SImassU '
+      diagTitle = 'SeaIce mass at U point'
+      diagUnits = 'kg              '
+      diagCode  = 'UU      U1      '
+      diagMate  = diagNum
+      CALL DIAGNOSTICS_ADDTOLIST( diagNum,
+     I     diagName, diagCode, diagUnits, diagTitle, diagMate, myThid )
+
+      diagName  = 'SImassV '
+      diagTitle = 'SeaIce mass at V point'
+      diagUnits = 'kg              '
+      diagCode  = 'VV      U1      '
+      diagMate  = diagNum
+      CALL DIAGNOSTICS_ADDTOLIST( diagNum,
+     I     diagName, diagCode, diagUnits, diagTitle, diagMate, myThid )
+
+CEAW]
+
+
+      
 CEAW[ Adding FORCEX0 and tilt diagnostics
       diagName  = 'FORCEX0 '
       diagTitle = 'SeaIce Wind forcing in X momentum equation'
