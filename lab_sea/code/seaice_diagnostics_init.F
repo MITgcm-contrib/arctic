@@ -375,7 +375,6 @@ CEAW[ Adding mass
       diagMate  = diagNum
       CALL DIAGNOSTICS_ADDTOLIST( diagNum,
      I     diagName, diagCode, diagUnits, diagTitle, diagMate, myThid )
-
 CEAW]
 
 
@@ -541,7 +540,6 @@ CEAW[ Creating RHS and LHS diagnostics
       diagCode  = 'VV      M1      '
       CALL DIAGNOSTICS_ADDTOLIST( diagNum,
      I     diagName, diagCode, diagUnits, diagTitle, 0, myThid )
-
 CEAW]                                                                                                                                                         
 
 

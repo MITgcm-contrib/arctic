@@ -203,11 +203,6 @@ C     Scalar product used in FGMRES needs a metric
       INTEGER nVec
       PARAMETER ( nVec=2*sNx*sNy )
       _RL scalarProductMetric( nVec, 1, nSx, nSy )
-      COMMON /SEAICE_KRYLOV_RL/ scalarProductMetric
-CEAW[ C     Define Picard iteration counter                                                                                                                 
-      INTEGER picardIter
-      COMMON /SEAICE_ITER_VARS/ picardIter
-CEAW[     New diagnostics
       _RL uLHS0(1-OLx:sNx+OLx, 1-OLy:sNy+OLy, nSx, nSy)
       _RL vLHS0(1-OLx:sNx+OLx, 1-OLy:sNy+OLy, nSx, nSy)
       _RL uLHS1(1-OLx:sNx+OLx, 1-OLy:sNy+OLy, nSx, nSy)
@@ -219,7 +214,24 @@ CEAW[     New diagnostics
       _RL uRHS1(1-OLx:sNx+OLx, 1-OLy:sNy+OLy, nSx, nSy)
       _RL vRHS1(1-OLx:sNx+OLx, 1-OLy:sNy+OLy, nSx, nSy)
       _RL uRHS2(1-OLx:sNx+OLx, 1-OLy:sNy+OLy, nSx, nSy)
-      _RL vRHS2(1-OLx:sNx+OLx, 1-OLy:sNy+OLy, nSx, nSy)            
+      _RL vRHS2(1-OLx:sNx+OLx, 1-OLy:sNy+OLy, nSx, nSy)       
+      COMMON /SEAICE_KRYLOV_RL/ scalarProductMetric
+CEAW[ C     Define Picard iteration counter                                                                                                                
+      INTEGER picardIter
+C      COMMON /SEAICE_ITER_VARS/ picardIter
+CEAW[     New diagnostics
+C      _RL uLHS0(1-OLx:sNx+OLx, 1-OLy:sNy+OLy, nSx, nSy)
+C      _RL vLHS0(1-OLx:sNx+OLx, 1-OLy:sNy+OLy, nSx, nSy)
+C      _RL uLHS1(1-OLx:sNx+OLx, 1-OLy:sNy+OLy, nSx, nSy)
+C      _RL vLHS1(1-OLx:sNx+OLx, 1-OLy:sNy+OLy, nSx, nSy)
+C      _RL uLHS2(1-OLx:sNx+OLx, 1-OLy:sNy+OLy, nSx, nSy)
+C      _RL vLHS2(1-OLx:sNx+OLx, 1-OLy:sNy+OLy, nSx, nSy)
+C      _RL uLHS3(1-OLx:sNx+OLx, 1-OLy:sNy+OLy, nSx, nSy)
+C      _RL vLHS3(1-OLx:sNx+OLx, 1-OLy:sNy+OLy, nSx, nSy)
+C      _RL uRHS1(1-OLx:sNx+OLx, 1-OLy:sNy+OLy, nSx, nSy)
+C      _RL vRHS1(1-OLx:sNx+OLx, 1-OLy:sNy+OLy, nSx, nSy)
+C      _RL uRHS2(1-OLx:sNx+OLx, 1-OLy:sNy+OLy, nSx, nSy)
+C      _RL vRHS2(1-OLx:sNx+OLx, 1-OLy:sNy+OLy, nSx, nSy)            
 C      COMMON /SEAICE_DIAGNOSTICS_RL/
 C  &     timederivU, coriU, Cui, Cuo, divsigU, tiltU
 CEAW]

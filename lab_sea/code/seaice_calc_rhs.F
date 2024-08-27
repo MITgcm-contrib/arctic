@@ -91,8 +91,8 @@ C     initialise fractional areas at velocity points
 C     ice-velocity independent contribution to drag terms
 C     - Cdrag*(uVel*cosWat - vVel*sinWat)/(vVel*cosWat + uVel*sinWat)
 C     ( remember to average to correct velocity points )
-            uRHS1(I,J,bi,bj)   = FORCEX(I,J,bi,bj)*maskinW(I,J,bi,bj)
-            uRHS2(I,J,bi,bj)   = (
+          uRHS1(I,J,bi,bj)   = FORCEX(I,J,bi,bj)*maskinW(I,J,bi,bj)
+          uRHS2(I,J,bi,bj)   = (
      &         0.5 _d 0 * ( DWATN(I,J,bi,bj)+DWATN(I-1,J,bi,bj) ) *
      &         COSWAT * uVel(I,J,kSrf,bi,bj)
      &         - SIGN(SINWAT, _fCori(I,J,bi,bj))* 0.5 _d 0 *
@@ -101,8 +101,8 @@ C     ( remember to average to correct velocity points )
      &         + DWATN(I-1,J,bi,bj) * 0.5 _d 0 *
      &          ( vVel(I-1,J,kSrf,bi,bj)+vVel(I-1,J+1,kSrf,bi,bj) )
      &           ) )*areaW(I,J)*maskinW(I,J,bi,bj)
-            vRHS1(I,J,bi,bj)    = FORCEY(I,J,bi,bj)*maskinS(I,J,bi,bj)
-            vRHS2(I,J,bi,bj)    = (
+          vRHS1(I,J,bi,bj)    = FORCEY(I,J,bi,bj)*maskinS(I,J,bi,bj)
+          vRHS2(I,J,bi,bj)    = (
      &         0.5 _d 0 * ( DWATN(I,J,bi,bj)+DWATN(I,J-1,bi,bj) ) *
      &         COSWAT * vVel(I,J,kSrf,bi,bj)
      &         + SIGN(SINWAT, _fCori(I,J,bi,bj)) * 0.5 _d 0 *
@@ -110,7 +110,7 @@ C     ( remember to average to correct velocity points )
      &          ( uVel(I,J  ,kSrf,bi,bj)+uVel(I+1,J  ,kSrf,bi,bj))
      &         + DWATN(I,J-1,bi,bj) * 0.5 _d 0 *
      &          ( uVel(I,J-1,kSrf,bi,bj)+uVel(I+1,J-1,kSrf,bi,bj))
-     &         ) )*areaS(I,J)*maskinW(I,J,bi,bj)
+     &         ) )*areaS(I,J)*maskinS(I,J,bi,bj)
           uIceRHS(I,J,bi,bj) = uRHS1(I,J,bi,bj) + uRHS2(I,J,bi,bj)
           vIceRHS(I,J,bi,bj) = vRHS1(I,J,bi,bj) + vRHS2(I,J,bi,bj)
 C     apply masks for interior (important when we have open boundaries)

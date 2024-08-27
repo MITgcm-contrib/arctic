@@ -434,17 +434,23 @@ C End of IF (SEAICEuseDYNAMICS and DIFFERENT_MULTIPLE ...
 
 CEAW[DO: Re-call the RHS and LHS equations, and maybe the residual to output fields.
 CEAW: The below has been copied and pasted from the Krylov S/R. 
-      PRINT *, 'Picard Number is', picardIter
+C      PRINT *, 'Picard Number is', picardIter
 C     compute rhs that does not change during Krylov iteration           
-       CALL SEAICE_CALC_RHS(
+      CALL SEAICE_CALC_RHS(
      O     uIceRHS, vIceRHS, uRHS1, vRHS1, uRHS2, vRHS2, 
+C     O     uIceRHS, vIceRHS, uRHS1, vRHS1, uRHS2, vRHS2, 
      I     picardIter, 0, myTime, myIter, myThid )
        
        CALL SEAICE_CALC_LHS(
-     I         uIce, vIce,
+     I     uIce, vIce,
      O     uIceLHS, vIceLHS,uLHS0,vLHS0,uLHS1,vLHS1,
      &     uLHS2,vLHS2,uLHS3,vLHS3,
-     I         picardIter, myTime, myIter, myThid )
+     I     picardIter, myTime, myIter, myThid )
+
+C     I     uIce, vIce,
+c     O     uIceLHS, vIceLHS,uLHS0,vLHS0,uLHS1,vLHS1,
+C     &     uLHS2,vLHS2,uLHS3,vLHS3,
+C     I         picardIter, myTime, myIter, myThid )
 C     Calculate the residual                                                                                                                                 
        DO bj=myByLo(myThid),myByHi(myThid)
         DO bi=myBxLo(myThid),myBxHi(myThid)

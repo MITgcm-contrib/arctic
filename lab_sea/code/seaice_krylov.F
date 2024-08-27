@@ -224,13 +224,19 @@ C     the Krylov iteration)
      I      0, myTime, myIter, myThid )
 C     compute rhs that does not change during Krylov iteration
        CALL SEAICE_CALC_RHS(
-     O      uIceRHS, vIceRHS,
+     O     uIceRHS, vIceRHS, uRHS1, vRHS1, uRHS2, vRHS2, 
+C     O      uIceRHS, vIceRHS,
      I      picardIter, 0, myTime, myIter, myThid )
 C     compute rhs for initial residual
        CALL SEAICE_CALC_LHS(
-     I         uIce, vIce,
-     O         uIceLHS, vIceLHS,
-     I         picardIter, myTime, myIter, myThid )
+     I     uIceLin, vIceLin,
+     O     uIceLHS, vIceLHS,uLHS0,vLHS0,uLHS1,vLHS1,
+     &     uLHS2,vLHS2,uLHS3,vLHS3,
+     I     picardIter, myTime, myIter, myThid )
+
+C     I         uIce, vIce,
+C     O         uIceLHS, vIceLHS,
+C     I         picardIter, myTime, myIter, myThid )
 C     Calculate the residual
        DO bj=myByLo(myThid),myByHi(myThid)
         DO bi=myBxLo(myThid),myBxHi(myThid)
@@ -352,9 +358,14 @@ C     Compute lhs of equations (A*x)
      O         e11, e22, e12,
      I         krylovIter, myTime, myIter, myThid )
           CALL SEAICE_CALC_LHS(
-     I         uWork, vWork,
-     O         uIceLHS, vIceLHS,
-     I         picardIter, myTime, myIter, myThid )
+     I     uWork, vWork,
+     O     uIceLHS, vIceLHS,uLHS0,vLHS0,uLHS1,vLHS1,
+     &     uLHS2,vLHS2,uLHS3,vLHS3,
+     I     picardIter, myTime, myIter, myThid )
+
+C     I         uWork, vWork,
+C     O         uIceLHS, vIceLHS,
+C     I         picardIter, myTime, myIter, myThid )
           DO bj=myByLo(myThid),myByHi(myThid)
            DO bi=myBxLo(myThid),myBxHi(myThid)
             DO j=1-OLy,sNy+OLy
