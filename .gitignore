@@ -25,5 +25,6 @@ _$*
 *.elc
 *.ln
 core
-
+lab_sea/build
+lab_sea/run
 # CVS default ignores end
