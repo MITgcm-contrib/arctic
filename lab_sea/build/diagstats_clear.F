@@ -1,1 +1,0 @@
-../../../MITgcm//pkg/diagnostics/diagstats_clear.F

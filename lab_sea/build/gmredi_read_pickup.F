@@ -1,1 +1,0 @@
-../../../MITgcm//pkg/gmredi/gmredi_read_pickup.F

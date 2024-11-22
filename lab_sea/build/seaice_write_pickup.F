@@ -1,1 +1,0 @@
-../../../MITgcm//pkg/seaice/seaice_write_pickup.F

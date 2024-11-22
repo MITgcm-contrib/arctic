@@ -1,1 +1,0 @@
-../../../MITgcm//pkg/cd_code/cd_code_read_pickup.F

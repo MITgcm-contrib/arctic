@@ -1,1 +1,0 @@
-../../../MITgcm//pkg/ptracers/ptracers_write_pickup.F

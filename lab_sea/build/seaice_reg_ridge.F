@@ -1,1 +1,0 @@
-../../../MITgcm//pkg/seaice/seaice_reg_ridge.F

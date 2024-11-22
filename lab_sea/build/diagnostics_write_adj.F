@@ -1,1 +1,0 @@
-../../../MITgcm//pkg/diagnostics/diagnostics_write_adj.F

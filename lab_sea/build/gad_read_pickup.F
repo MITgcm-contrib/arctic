@@ -1,1 +1,0 @@
-../../../MITgcm//pkg/generic_advdiff/gad_read_pickup.F

@@ -1,1 +1,0 @@
-../../../MITgcm//pkg/diagnostics/diagstats_ini_io.F

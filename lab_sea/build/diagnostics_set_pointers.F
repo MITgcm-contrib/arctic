@@ -1,1 +1,0 @@
-../../../MITgcm//pkg/diagnostics/diagnostics_set_pointers.F
